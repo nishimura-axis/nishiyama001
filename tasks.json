@@ -2,18 +2,18 @@
   "tasks": [
     {
       "id": "task-001",
-      "title": "nishiyama002 設計（CLAUDE.md、リポジトリ構成、ダッシュボード要件）",
+      "title": "nishiyama002/003 設計",
       "status": "done",
       "priority": "urgent",
       "created": "2026-03-01T21:49:00+09:00",
-      "updated": "2026-03-01T23:50:00+09:00",
+      "updated": "2026-03-02T00:45:00+09:00",
       "subtasks": [
         { "title": "リサーチ", "status": "done" },
-        { "title": "CLAUDE.md案", "status": "done" },
-        { "title": "リポジトリ構成", "status": "done" },
-        { "title": "ダッシュボード要件定義", "status": "done" },
+        { "title": "ダッシュボード要件定義v1", "status": "done" },
         { "title": "セルフレビュー", "status": "done" },
         { "title": "v2改訂（質問回答反映）", "status": "done" },
+        { "title": "2号CLAUDE.md v3（AXAD専属）", "status": "done" },
+        { "title": "3号CLAUDE.md（汎用開発）", "status": "done" },
         { "title": "にっしーレビュー待ち", "status": "in_progress" }
       ]
     },
@@ -24,7 +24,7 @@
       "priority": "high",
       "created": "2026-03-01T20:41:00+09:00",
       "updated": "2026-03-01T21:49:00+09:00",
-      "description": "nishiyama002設計が優先。完了後に着手"
+      "description": "nishiyama002/003設計完了後に着手"
     }
   ]
 }
