@@ -1,54 +1,55 @@
 {
   "agent": "nishiyama001",
-  "updated": "2026-03-03T17:40:00+09:00",
+  "updated": "2026-03-04T01:09:00+09:00",
   "status": "working",
-  "currentTask": "自動精査ページ設計書作成",
+  "currentTask": "nishiyama005セットアップ",
   "tasks": [
     {
       "id": "task-001",
       "title": "自動精査ページ設計書",
-      "status": "in_progress",
+      "status": "done",
       "priority": 1,
       "description": "部長・課長が自分で精査基準を編集できるUI。テンプレート方式、競合チェック、シミュレーション機能。",
       "created": "2026-03-03",
-      "updated": "2026-03-03"
+      "updated": "2026-03-04",
+      "output": "requirements/07_review_page.md"
     },
     {
       "id": "task-002",
-      "title": "nishiyama005（品質管理）設計",
-      "status": "todo",
-      "priority": 2,
-      "description": "品質ゲートエージェントのSOUL.md、チェック軸、運用フロー設計",
+      "title": "nishiyama005（品質管理）セットアップ",
+      "status": "in_progress",
+      "priority": 1,
+      "description": "SOUL.md/AGENTS.md作成→OpenClaw登録→Telegram bot→動く状態にする。今夜中",
       "created": "2026-03-03",
-      "updated": "2026-03-03"
+      "updated": "2026-03-04"
     },
     {
       "id": "task-003",
       "title": "木口AI化 設計書",
       "status": "todo",
-      "priority": 3,
-      "description": "Plaud Note + tl;dv → Zapier → AI要約 → Vault保存パイプライン設計",
+      "priority": 2,
+      "description": "PJメモのAI化設計。にっしーレビュー後に3号展開。今夜中",
       "created": "2026-03-03",
-      "updated": "2026-03-03"
+      "updated": "2026-03-04"
     },
     {
       "id": "task-004",
       "title": "nishiyama002（AXAD専属）セットアップ",
       "status": "todo",
-      "priority": 4,
-      "description": "AXAD専属フルスタックエンジニア。SOUL.md/AGENTS.md設計",
+      "priority": 3,
+      "description": "AXAD専属フルスタックエンジニア。SOUL.md/AGENTS.md設計。動かすのはまだ先",
       "created": "2026-03-03",
-      "updated": "2026-03-03"
+      "updated": "2026-03-04"
     },
     {
       "id": "task-005",
       "title": "キャンペーン名エラー検知 設計",
       "status": "blocked",
-      "priority": 5,
+      "priority": 4,
       "description": "2号の最初のタスク。要件待ち",
       "blockedBy": "にっしーから要件送付待ち",
       "created": "2026-03-03",
-      "updated": "2026-03-03"
+      "updated": "2026-03-04"
     }
   ]
 }
