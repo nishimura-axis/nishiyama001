@@ -1,30 +1,54 @@
 {
+  "agent": "nishiyama001",
+  "updated": "2026-03-03T17:40:00+09:00",
+  "status": "working",
+  "currentTask": "自動精査ページ設計書作成",
   "tasks": [
     {
       "id": "task-001",
-      "title": "nishiyama002/003 設計",
-      "status": "done",
-      "priority": "urgent",
-      "created": "2026-03-01T21:49:00+09:00",
-      "updated": "2026-03-02T00:45:00+09:00",
-      "subtasks": [
-        { "title": "リサーチ", "status": "done" },
-        { "title": "ダッシュボード要件定義v1", "status": "done" },
-        { "title": "セルフレビュー", "status": "done" },
-        { "title": "v2改訂（質問回答反映）", "status": "done" },
-        { "title": "2号CLAUDE.md v3（AXAD専属）", "status": "done" },
-        { "title": "3号CLAUDE.md（汎用開発）", "status": "done" },
-        { "title": "にっしーレビュー待ち", "status": "in_progress" }
-      ]
+      "title": "自動精査ページ設計書",
+      "status": "in_progress",
+      "priority": 1,
+      "description": "部長・課長が自分で精査基準を編集できるUI。テンプレート方式、競合チェック、シミュレーション機能。",
+      "created": "2026-03-03",
+      "updated": "2026-03-03"
     },
     {
       "id": "task-002",
-      "title": "AXAD Phase 2 Step 1 要件定義（記事一覧DB化）",
+      "title": "nishiyama005（品質管理）設計",
+      "status": "todo",
+      "priority": 2,
+      "description": "品質ゲートエージェントのSOUL.md、チェック軸、運用フロー設計",
+      "created": "2026-03-03",
+      "updated": "2026-03-03"
+    },
+    {
+      "id": "task-003",
+      "title": "木口AI化 設計書",
+      "status": "todo",
+      "priority": 3,
+      "description": "Plaud Note + tl;dv → Zapier → AI要約 → Vault保存パイプライン設計",
+      "created": "2026-03-03",
+      "updated": "2026-03-03"
+    },
+    {
+      "id": "task-004",
+      "title": "nishiyama002（AXAD専属）セットアップ",
+      "status": "todo",
+      "priority": 4,
+      "description": "AXAD専属フルスタックエンジニア。SOUL.md/AGENTS.md設計",
+      "created": "2026-03-03",
+      "updated": "2026-03-03"
+    },
+    {
+      "id": "task-005",
+      "title": "キャンペーン名エラー検知 設計",
       "status": "blocked",
-      "priority": "high",
-      "created": "2026-03-01T20:41:00+09:00",
-      "updated": "2026-03-01T21:49:00+09:00",
-      "description": "nishiyama002/003設計完了後に着手"
+      "priority": 5,
+      "description": "2号の最初のタスク。要件待ち",
+      "blockedBy": "にっしーから要件送付待ち",
+      "created": "2026-03-03",
+      "updated": "2026-03-03"
     }
   ]
 }
