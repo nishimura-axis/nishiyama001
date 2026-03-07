@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>アド管理 全体像</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, 'Hiragino Sans', sans-serif; background: #0f172a; color: #e2e8f0; padding: 24px; line-height: 1.7; }
+  .container { max-width: 800px; margin: 0 auto; }
+  h1 { font-size: 1.6rem; color: #38bdf8; margin-bottom: 8px; }
+  h2 { font-size: 1.2rem; color: #f59e0b; margin: 32px 0 12px; border-bottom: 1px solid #334155; padding-bottom: 6px; }
+  h3 { font-size: 1rem; color: #a78bfa; margin: 20px 0 8px; }
+  .subtitle { color: #94a3b8; font-size: 0.9rem; margin-bottom: 32px; }
+  .card { background: #1e293b; border-radius: 12px; padding: 20px; margin: 12px 0; }
+  .role-badge { display: inline-block; background: #38bdf8; color: #0f172a; font-weight: bold; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; margin-bottom: 12px; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0; }
+  th { text-align: left; padding: 8px 12px; background: #334155; color: #f59e0b; font-size: 0.85rem; }
+  td { padding: 8px 12px; border-bottom: 1px solid #334155; font-size: 0.9rem; }
+  .highlight { color: #34d399; font-weight: bold; }
+  .muted { color: #64748b; font-size: 0.85rem; }
+  ul, ol { padding-left: 20px; margin: 8px 0; }
+  li { margin: 4px 0; }
+  .flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 12px 0; }
+  .flow-step { background: #334155; padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; }
+  .flow-arrow { color: #f59e0b; font-weight: bold; }
+  .grade { display: inline-block; background: #475569; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; margin-left: 4px; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📊 アド管理 全体像</h1>
+<p class="subtitle">すごい会議 DAY1 事前MTG — 2026.03.07</p>
+
+<h2>🧑‍💼 西村の役割</h2>
+<div class="card">
+  <span class="role-badge">広告本部 部長 ＋ 経営システム本部</span>
+  <ul>
+    <li><strong>広告本部</strong>：アド管理チームの統括。意思決定・体制設計・育成</li>
+    <li><strong>経営システム本部</strong>：AXAD（運用OS）の設計・開発。全事業部横断のシステム基盤構築</li>
+    <li><strong>全社</strong>：すごい会議メンバー（部長以上のトップテーブル）</li>
+  </ul>
+</div>
+
+<h2>💰 アドアフィリエイトの事業構造</h2>
+<div class="card">
+  <p><strong>広告を出稿してアフィリエイト成果を獲得し、差益を得るモデル</strong></p>
+  <div class="flow">
+    <span class="flow-step">📱 広告</span><span class="flow-arrow">→</span>
+    <span class="flow-step">📰 記事LP</span><span class="flow-arrow">→</span>
+    <span class="flow-step">🏢 本LP</span><span class="flow-arrow">→</span>
+    <span class="flow-step">📝 フォーム</span><span class="flow-arrow">→</span>
+    <span class="flow-step highlight">✅ CV（成果）</span>
+  </div>
+  <p style="margin-top: 12px;"><strong>利益 = 成果報酬 − 広告費</strong></p>
+  <p class="muted">主要媒体：Meta / TikTok / Google(YT) / X / LINE</p>
+</div>
+
+<h2>⚙️ アド管理の業務カテゴリ（9領域）</h2>
+<div class="card">
+  <table>
+    <tr><th>#</th><th>カテゴリ</th><th>主担当</th></tr>
+    <tr><td>1</td><td>つなぎこみ（新規）</td><td>友利</td></tr>
+    <tr><td>2</td><td>つなぎこみ（既存）</td><td>石田</td></tr>
+    <tr><td>3</td><td>数字合わせ</td><td>筒井</td></tr>
+    <tr><td>4</td><td>出稿部管理</td><td>友利</td></tr>
+    <tr><td>5</td><td>スプシ・GAS</td><td>友利</td></tr>
+    <tr><td>6</td><td>自動化・ツール開発</td><td>友利</td></tr>
+    <tr><td>7</td><td>新規媒体（Yahoo）</td><td>筒井</td></tr>
+    <tr><td>8</td><td>ASP（新領域）</td><td>筒井</td></tr>
+    <tr><td>9</td><td>定期タスク</td><td>石田</td></tr>
+  </table>
+</div>
+
+<h2>👥 チーム構成と役割</h2>
+<div class="card">
+  <h3>筒井花乃 <span class="grade">等級 2.5</span>「守りを固める」</h3>
+  <ul>
+    <li>数字合わせの完全自走</li>
+    <li>AI活用でワークフロー改善サイクル</li>
+    <li>ASP新領域の作業巻き取り</li>
+  </ul>
+</div>
+<div class="card">
+  <h3>友利きらら <span class="grade">等級 2.5</span>「エース・推進力」</h3>
+  <ul>
+    <li>出稿部管理：運用者の出稿リソースを<span class="highlight">1日30分以内</span>に</li>
+    <li>つなぎこみ（新規）＋非定型依頼の振り分け</li>
+    <li>タスク管理ツール開発（Claude Code活用）</li>
+  </ul>
+</div>
+<div class="card">
+  <h3>石田乃愛 <span class="grade">等級 1→2</span>「基礎固め」</h3>
+  <ul>
+    <li>つなぎこみ（既存）の自走</li>
+    <li>定期タスクの主体的改善</li>
+    <li>等級2の入口：処理可否の判断ができる</li>
+  </ul>
+</div>
+<div class="card">
+  <h3>西村知輝「全体設計 ＋ 意思決定」</h3>
+  <ul>
+    <li>体制設計・仕組み化・育成</li>
+    <li>AXAD（運用OS）開発</li>
+    <li>仕組みで管理コストを下げ、戦略に集中</li>
+  </ul>
+</div>
+
+<h2>📈 等級ロードマップ</h2>
+<div class="card">
+  <table>
+    <tr><th>等級</th><th>定義</th></tr>
+    <tr><td>1 新人</td><td>型化タスク・ルーティンをこなす作業者</td></tr>
+    <tr><td>2 メンバー</td><td>既存領域をイレギュラー含め自走。判断力</td></tr>
+    <tr><td>3 エース</td><td>既存マスター＋新領域応用＋新人教育</td></tr>
+    <tr><td>4 課長</td><td>全業務＋仕組み化＋PM</td></tr>
+  </table>
+</div>
+
+<h2>🚧 現在の課題</h2>
+<div class="card">
+  <ol>
+    <li><strong>日報・朝会・週次MTGの形骸化</strong><br><span class="muted">タスクリストのコピペが報告。判断材料にならない</span></li>
+    <li style="margin-top: 12px;"><strong>西村がボトルネック</strong><br><span class="muted">設計・実装・運用判断・PM全てが1人に集中</span></li>
+    <li style="margin-top: 12px;"><strong>タスク管理の仕組みがない</strong><br><span class="muted">コミットメントリスト形骸化。滞留が可視化されない</span></li>
+  </ol>
+</div>
+
+<h2>🖥️ AXAD（運用OS）</h2>
+<div class="card">
+  <p>西村が設計・開発した<span class="highlight">広告運用の基幹システム</span></p>
+  <ul>
+    <li>精査・分析・0時ON/OFF の自動化</li>
+    <li>スプレッドシート依存からの脱却</li>
+    <li>データドリブンな運用判断の基盤</li>
+  </ul>
+  <p class="muted" style="margin-top: 8px;">目標：運用者がクリエイティブPDCAだけに没頭できる環境</p>
+</div>
+
+<p class="muted" style="margin-top: 40px; text-align: center;">© 2026 AXIS-Ads</p>
+</div>
+</body>
+</html>
