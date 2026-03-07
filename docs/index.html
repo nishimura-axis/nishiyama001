@@ -14,6 +14,7 @@
   .subtitle { color: #94a3b8; font-size: 0.9rem; margin-bottom: 32px; }
   .card { background: #1e293b; border-radius: 12px; padding: 20px; margin: 12px 0; }
   .role-badge { display: inline-block; background: #38bdf8; color: #0f172a; font-weight: bold; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; margin-bottom: 12px; }
+  .role-badge-green { display: inline-block; background: #34d399; color: #0f172a; font-weight: bold; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; margin-bottom: 12px; }
   table { width: 100%; border-collapse: collapse; margin: 8px 0; }
   th { text-align: left; padding: 8px 12px; background: #334155; color: #f59e0b; font-size: 0.85rem; }
   td { padding: 8px 12px; border-bottom: 1px solid #334155; font-size: 0.9rem; }
@@ -21,10 +22,18 @@
   .muted { color: #64748b; font-size: 0.85rem; }
   ul, ol { padding-left: 20px; margin: 8px 0; }
   li { margin: 4px 0; }
-  .flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 12px 0; }
-  .flow-step { background: #334155; padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; }
-  .flow-arrow { color: #f59e0b; font-weight: bold; }
   .grade { display: inline-block; background: #475569; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; margin-left: 4px; }
+  .flow-diagram { background: #1e293b; border-radius: 12px; padding: 20px; margin: 12px 0; overflow-x: auto; }
+  .flow-row { display: flex; align-items: center; gap: 6px; margin: 8px 0; flex-wrap: wrap; }
+  .flow-main { background: #334155; padding: 8px 14px; border-radius: 8px; font-size: 0.85rem; text-align: center; min-width: 80px; }
+  .flow-ad { background: #7c3aed; padding: 6px 10px; border-radius: 6px; font-size: 0.75rem; color: #e2e8f0; text-align: center; }
+  .flow-arrow { color: #f59e0b; font-weight: bold; font-size: 1.1rem; }
+  .flow-arrow-down { color: #f59e0b; font-weight: bold; font-size: 1.1rem; text-align: center; margin: 4px 0; }
+  .flow-section { margin: 16px 0; }
+  .flow-label { color: #94a3b8; font-size: 0.75rem; margin-bottom: 4px; }
+  .mission-box { border: 2px solid #34d399; border-radius: 12px; padding: 16px; margin: 16px 0; text-align: center; }
+  .mission-box p { font-size: 1.1rem; font-weight: bold; color: #34d399; }
+  .mission-box .sub { font-size: 0.85rem; color: #94a3b8; margin-top: 4px; }
 </style>
 </head>
 <body>
@@ -34,42 +43,111 @@
 
 <h2>🧑‍💼 西村の役割</h2>
 <div class="card">
-  <span class="role-badge">広告本部 部長 ＋ 経営システム本部</span>
+  <span class="role-badge">AXISホールディングス 経営システム本部</span>
+  <div class="mission-box">
+    <p>HDの各事業部・各部署の全員が<br>コア業務に注力できる環境を作る</p>
+    <p class="sub">システム・仕組み・AIで、人間は意思決定とゴール設定に集中</p>
+  </div>
   <ul>
     <li><strong>広告本部</strong>：アド管理チームの統括。意思決定・体制設計・育成</li>
-    <li><strong>経営システム本部</strong>：AXAD（運用OS）の設計・開発。全事業部横断のシステム基盤構築</li>
-    <li><strong>全社</strong>：すごい会議メンバー（部長以上のトップテーブル）</li>
+    <li><strong>HD全体</strong>：AXAD（運用OS）をはじめ、全事業部横断のシステム基盤構築</li>
   </ul>
 </div>
 
-<h2>💰 アドアフィリエイトの事業構造</h2>
+<h2>⚙️ アド管理の役割 — 広告運用の導線とアド管理の関わり</h2>
 <div class="card">
-  <p><strong>広告を出稿してアフィリエイト成果を獲得し、差益を得るモデル</strong></p>
-  <div class="flow">
-    <span class="flow-step">📱 広告</span><span class="flow-arrow">→</span>
-    <span class="flow-step">📰 記事LP</span><span class="flow-arrow">→</span>
-    <span class="flow-step">🏢 本LP</span><span class="flow-arrow">→</span>
-    <span class="flow-step">📝 フォーム</span><span class="flow-arrow">→</span>
-    <span class="flow-step highlight">✅ CV（成果）</span>
+  <div class="mission-box" style="border-color: #7c3aed;">
+    <p style="color: #a78bfa;">広告本部がコア業務（運用・CR制作）に<br>注力できる環境を作る</p>
+    <p class="sub">= アド管理のミッション</p>
   </div>
-  <p style="margin-top: 12px;"><strong>利益 = 成果報酬 − 広告費</strong></p>
-  <p class="muted">主要媒体：Meta / TikTok / Google(YT) / X / LINE</p>
 </div>
 
-<h2>⚙️ アド管理の業務カテゴリ（9領域）</h2>
-<div class="card">
-  <table>
-    <tr><th>#</th><th>カテゴリ</th><th>主担当</th></tr>
-    <tr><td>1</td><td>つなぎこみ（新規）</td><td>友利</td></tr>
-    <tr><td>2</td><td>つなぎこみ（既存）</td><td>石田</td></tr>
-    <tr><td>3</td><td>数字合わせ</td><td>筒井</td></tr>
-    <tr><td>4</td><td>出稿部管理</td><td>友利</td></tr>
-    <tr><td>5</td><td>スプシ・GAS</td><td>友利</td></tr>
-    <tr><td>6</td><td>自動化・ツール開発</td><td>友利</td></tr>
-    <tr><td>7</td><td>新規媒体（Yahoo）</td><td>筒井</td></tr>
-    <tr><td>8</td><td>ASP（新領域）</td><td>筒井</td></tr>
-    <tr><td>9</td><td>定期タスク</td><td>石田</td></tr>
-  </table>
+<div class="flow-diagram">
+  <p style="color: #f59e0b; font-weight: bold; margin-bottom: 16px;">▼ 広告運用の流れ × アド管理の業務</p>
+
+  <div class="flow-section">
+    <div class="flow-label">STEP 1：案件の立ち上げ</div>
+    <div class="flow-row">
+      <span class="flow-main">📋 新規案件/オファー受領</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-main">🔗 ASP連携・リンク発行</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-main">📊 アカウント開設</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-ad">アド管理：つなぎこみ（新規）— 友利</span>
+      <span class="flow-ad">アド管理：つなぎこみ（既存）— 石田</span>
+    </div>
+  </div>
+
+  <div class="flow-arrow-down">↓</div>
+
+  <div class="flow-section">
+    <div class="flow-label">STEP 2：出稿環境の整備</div>
+    <div class="flow-row">
+      <span class="flow-main">🏷️ ピクセル設置・管理</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-main">📰 記事LPへのリンク埋め込み</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-main">⚙️ キャンペーン構成設計</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-ad">アド管理：つなぎこみ + スプシ・GAS管理 — 友利</span>
+    </div>
+  </div>
+
+  <div class="flow-arrow-down">↓</div>
+
+  <div class="flow-section">
+    <div class="flow-label">STEP 3：運用（← 運用者のコア業務）</div>
+    <div class="flow-row">
+      <span class="flow-main" style="background: #065f46; border: 1px solid #34d399;">🎨 CR制作</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-main" style="background: #065f46; border: 1px solid #34d399;">📱 出稿</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-main" style="background: #065f46; border: 1px solid #34d399;">🔍 精査・分析</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-main" style="background: #065f46; border: 1px solid #34d399;">🔄 PDCA</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-ad">アド管理：出稿部管理（勤怠・エラー対応）— 友利</span>
+    </div>
+    <p class="muted" style="margin-top: 4px;">※ 運用者はここだけに集中すべき。それ以外をアド管理が巻き取る</p>
+  </div>
+
+  <div class="flow-arrow-down">↓</div>
+
+  <div class="flow-section">
+    <div class="flow-label">STEP 4：数値管理・インフラ</div>
+    <div class="flow-row">
+      <span class="flow-main">📊 運用数値の確認基盤</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-main">💰 売上突合・請求処理</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-main">📈 レポーティング</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-ad">アド管理：数字合わせ — 筒井</span>
+      <span class="flow-ad">アド管理：スプシ・GAS — 友利</span>
+    </div>
+  </div>
+
+  <div class="flow-arrow-down">↓</div>
+
+  <div class="flow-section">
+    <div class="flow-label">STEP 5：自動化・進化</div>
+    <div class="flow-row">
+      <span class="flow-main">🤖 ツール開発・自動化</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-main">🖥️ AXAD（運用OS）</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-main">📉 スプシ依存の脱却</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-ad">アド管理：自動化・ツール開発 — 友利</span>
+      <span class="flow-ad">西村：AXAD設計・開発</span>
+    </div>
+  </div>
 </div>
 
 <h2>👥 チーム構成と役割</h2>
@@ -120,7 +198,7 @@
 <h2>🚧 現在の課題</h2>
 <div class="card">
   <ol>
-    <li><strong>日報・朝会・週次MTGの形骸化</strong><br><span class="muted">タスクリストのコピペが報告。判断材料にならない</span></li>
+    <li><strong>属人的な管理</strong><br><span class="muted">スプシ依存、個人の記憶・経験に頼った業務フロー</span></li>
     <li style="margin-top: 12px;"><strong>西村がボトルネック</strong><br><span class="muted">設計・実装・運用判断・PM全てが1人に集中</span></li>
     <li style="margin-top: 12px;"><strong>タスク管理の仕組みがない</strong><br><span class="muted">コミットメントリスト形骸化。滞留が可視化されない</span></li>
   </ol>
