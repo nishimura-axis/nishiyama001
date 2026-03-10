@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ワーク — AI活用講義</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #0a0a1a;
+  --bg-secondary: #12122a;
+  --bg-tertiary: #1a1a3e;
+  --border-color: #2a2d55;
+  --accent-primary: #7c3aed;
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%);
+  --text-primary: #f0f0f5;
+  --text-secondary: #a0a0b8;
+  --text-muted: #6b6b80;
+  --glow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.8;
+}
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+h1 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--accent-primary);
+  margin: 3rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 1.5rem 0 0.75rem;
+}
+.subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-bottom: 3rem;
+}
+.schedule {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+.schedule th, .schedule td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.95rem;
+}
+.schedule th {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+}
+.schedule tr.highlight td {
+  background: rgba(99, 102, 241, 0.08);
+  font-weight: 500;
+}
+.schedule .tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.tag-work { background: rgba(99, 102, 241, 0.2); color: #a78bfa; }
+.tag-share { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+.tag-bonus { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+
+.prompt-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+.prompt-section h3 {
+  margin-top: 0;
+}
+.prompt-block {
+  position: relative;
+  margin: 1rem 0;
+}
+.prompt-block pre {
+  background: #0d0f1a;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  padding-top: 2.5rem;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', 'Noto Sans JP', monospace;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--border-color);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: 'Noto Sans JP', sans-serif;
+  transition: all 0.2s;
+  z-index: 1;
+}
+.copy-btn:hover { background: var(--accent-primary); }
+.note {
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+}
+.note-info { background: rgba(99, 102, 241, 0.1); }
+.note-warn { background: rgba(239, 68, 68, 0.1); }
+.note-tip { background: rgba(34, 197, 94, 0.1); }
+.divider {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 3rem 0;
+}
+@media (max-width: 600px) {
+  h1 { font-size: 1.8rem; }
+  .container { padding: 24px 16px 60px; }
+  .schedule th, .schedule td { padding: 0.5rem; font-size: 0.85rem; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🎯 ワーク</h1>
+<p class="subtitle">自分の業務を分解し、AIで生産性を10倍にする土台を作る</p>
+
+<!-- ========== SCHEDULE ========== -->
+<h2>📋 進行表</h2>
+<table class="schedule">
+  <thead>
+    <tr><th>時間</th><th>内容</th><th></th></tr>
+  </thead>
+  <tbody>
+    <tr><td>10:00-10:10</td><td>プレゼン</td><td></td></tr>
+    <tr><td>10:10-11:00</td><td>セットアップ</td><td></td></tr>
+    <tr><td>11:00-12:00</td><td>稲葉さん講義（承認率）</td><td></td></tr>
+    <tr><td>12:00-13:00</td><td>昼休憩 <span style="color:var(--text-muted);">※未完了者は居残りセットアップ</span></td><td></td></tr>
+    <tr class="highlight"><td>13:00-14:00</td><td><strong>ワーク第1層</strong>：業務の棚卸し</td><td><span class="tag tag-work">WORK</span></td></tr>
+    <tr class="highlight"><td>14:00-14:15</td><td><strong>共有タイム</strong>：何を自動化するか発表</td><td><span class="tag tag-share">SHARE</span></td></tr>
+    <tr class="highlight"><td>14:15-15:00</td><td><strong>ワーク第2層</strong>：自動化の実装</td><td><span class="tag tag-work">WORK</span></td></tr>
+    <tr><td>15:00</td><td>ここで終了OK 🏠</td><td></td></tr>
+    <tr><td>15:00-16:00</td><td><strong>おまけ</strong>：タスク整理 + 日々の使い方</td><td><span class="tag tag-bonus">BONUS</span></td></tr>
+  </tbody>
+</table>
+
+<hr class="divider">
+
+<!-- ========== WORK 1 ========== -->
+<h2>🔵 第1層：業務の棚卸し（13:00-14:00）</h2>
+
+<p>Claude Codeが対話形式であなたの昨日の業務を引き出し、分析します。<br>
+以下のプロンプトをClaude Codeにコピー＆ペーストして送信してください。</p>
+
+<div class="prompt-section">
+  <h3>📋 第1層プロンプト</h3>
+  <div class="prompt-block">
+    <button class="copy-btn" onclick="copyText(this)">コピー</button>
+    <pre># 業務の棚卸しワーク
+
+あなたは私の業務分析パートナーです。
+以下のステップを順番に進めてください。各ステップが完了してから次に進むこと。
+
+---
+
+## Step 1: 昨日の1日を書き出す
+
+対話形式で、私の昨日の業務を時系列で漏れなく引き出してください。
+
+### 聞き方のルール
+- 朝起きて出社してから退勤するまで、時系列で1つずつ聞く
+- 各業務について以下を深掘りする（2-3問ずつ）：
+  - 具体的に何をしたか
+  - なぜそれをしたか（判断基準は？）
+  - どれくらい時間がかかったか
+  - それは毎日やるか？頻度は？
+- 「もうない」と言われるまで聞き続ける
+- テンポよく。1回の質問は1-2個まで
+
+### 書き出しながら分類する
+業務が出てくるたびに、以下の3つに分類してください：
+- **判断**: 自分の経験・知見がないとできない意思決定
+- **作業**: 手順が決まっている。誰でもできる or 自動化できる
+- **コミュニケーション**: 人との調整・共有・指示
+
+全部出し切ったら、表にまとめて見せてください：
+| 時間帯 | 業務内容 | 所要時間 | 頻度 | 分類 |
+
+---
+
+## Step 2: コア業務を特定する
+
+私に以下を聞いてください：
+
+**「この中で、あなたが最もバリューを出している、
+あなたの役割・目標達成のために最も重要な業務はどれですか？」**
+
+私の回答をもとに：
+1. 選ばれた業務を **🔴 コア業務** とする
+2. コア業務にかかっている時間を集計する
+3. それ以外の業務にかかっている合計時間を集計する
+4. 1日の中でコア業務に使えている時間の割合を出す
+
+---
+
+## Step 3: パターン判定
+
+コア業務の時間割合をもとに、以下のどちらかを判定して伝えてください。
+
+### パターンA: コア業務に十分時間を使えている場合
+→ 「コア業務にしっかり時間を使えていますね。
+次のワークでは、そのコア業務をさらに分解して、
+その中で簡略化・自動化できる部分を探っていきます。」
+
+### パターンB: ノンコア業務に時間を取られている場合
+→ 「コア業務に使える時間が圧迫されていますね。
+次のワークでは、ノンコア業務の中で一番時間がかかっているもの、
+ブロッカーになっているものを特定して、簡略化・自動化する方法を考えます。」
+
+---
+
+## Step 4: 保存
+
+以下のファイルを作成してください：
+
+1. **`20_Context/My_Work_Profile.md`** — 業務プロファイル
+   - 業務一覧の表（Step 1）
+   - コア業務の特定結果と時間割合（Step 2）
+   - パターン判定と次のアクション（Step 3）
+
+2. **`07_DailyLog/（昨日の日付）.md`** — 昨日の振り返りログ（時系列の詳細）
+
+作成したらGitHubにpushしてください。
+
+---
+
+## 完了
+
+保存できたら、以下を伝えてください：
+「✅ 業務の棚卸しが完了しました。
+自動化する対象が特定できました。
+全体共有の時間まで待機してください。」
+
+では始めてください。
+「昨日の朝、出社してまず最初に何をしましたか？」から聞いてください。</pre>
+  </div>
+</div>
+
+<div class="note note-info">💡 Claude Codeが質問してくれるので、聞かれたことに答えるだけでOKです。</div>
+<div class="note note-warn">⚠️ AIが「実行してよいですか？」と聞いてきたら「はい」と答えてください。</div>
+
+<hr class="divider">
+
+<!-- ========== SHARE ========== -->
+<h2>🟢 共有タイム（14:00-14:15）</h2>
+<p>各自、以下を発表してください：</p>
+<ul style="padding-left: 1.5rem; color: var(--text-secondary);">
+  <li style="margin-bottom: 0.5rem;">自分のコア業務は何だったか</li>
+  <li style="margin-bottom: 0.5rem;">パターンA / B のどちらだったか</li>
+  <li>これから何を自動化/簡略化するか</li>
+</ul>
+
+<hr class="divider">
+
+<!-- ========== WORK 2 ========== -->
+<h2>🔵 第2層：自動化の実装（14:15-15:00）</h2>
+
+<p>特定した課題をClaude Codeと壁打ちして、実際に解決策を作ります。<br>
+以下のプロンプトを送信してください。</p>
+
+<div class="prompt-section">
+  <h3>📋 第2層プロンプト</h3>
+  <div class="prompt-block">
+    <button class="copy-btn" onclick="copyText(this)">コピー</button>
+    <pre># 自動化ワーク
+
+20_Context/My_Work_Profile.md を読んでください。
+
+前のワークで特定した「自動化/簡略化すべき業務」について、
+具体的にどうやって解決するか、一緒に考えていきます。
+
+## 進め方
+
+### 1. 対象の確認
+My_Work_Profile.md のパターン判定結果を確認し、
+自動化する対象の業務を改めて明示してください。
+
+### 2. 分解
+その業務をさらに細かいサブタスクに分解してください。
+分解したら私に確認を取ってから進めてください。
+
+### 3. 壁打ち
+各サブタスクについて、以下の観点で解決策を一緒に考えてください：
+- AIに任せられる部分はあるか
+- テンプレート化できるか
+- チェックリスト化できるか
+- 自動化スクリプトを書けるか
+- そもそもやめていいものはないか
+
+### 4. 実装
+一番効果が大きく、すぐ着手できるものから取り組んでください。
+可能であればその場で成果物を作ってください：
+- プロンプトテンプレート（繰り返し使える指示文）
+- チェックリスト
+- 判断基準のドキュメント
+- 簡易スクリプト
+- etc.
+
+作った成果物はVault内の適切な場所に保存してください。
+（例: 30_Projects/, 40_Knowledge/, 60_Templates/ など）
+
+### 5. 保存
+完了したら、以下を行ってください：
+1. My_Work_Profile.md に「壁打ち結果と次のアクション」セクションを追記
+2. GitHubにpush
+
+---
+
+では始めてください。まずMy_Work_Profile.mdを読んで、
+自動化する対象を確認するところから。</pre>
+  </div>
+</div>
+
+<div class="note note-info">💡 作った成果物（テンプレート、チェックリスト等）は明日からそのまま使えます。</div>
+
+<hr class="divider">
+
+<!-- ========== BONUS ========== -->
+<h2>🟡 おまけ：タスク整理 + 日々の使い方（15:00-16:00）</h2>
+
+<p>時間がある方は、頭の中のタスクを全部吐き出してAIに整理してもらいましょう。</p>
+
+<div class="prompt-section">
+  <h3>📋 おまけプロンプト</h3>
+  <div class="prompt-block">
+    <button class="copy-btn" onclick="copyText(this)">コピー</button>
+    <pre># タスク整理ワーク
+
+今の頭の中にあるタスク・やらなきゃいけないこと・気になっていることを全部吐き出してください。
+仕事でもプライベートでも、大きいことでも小さいことでも構いません。
+
+## あなたの役割
+
+1. 私が出すタスクを全て 00_Inbox/ に1ファイルずつ保存してください
+   - ファイル名は内容がわかる簡潔な名前で（例: 確定申告の準備.md）
+   - テンプレート: 60_Templates/Inbox.md を使用
+
+2. 全部出し切ったら、一覧を見せて以下に分類してください：
+   - **30_Projects/** 行き → プロジェクトとして管理すべきもの
+   - **そのまま00_Inbox/** → いつかやる / 情報メモ
+   - **捨てる** → もう不要なもの
+
+3. 分類したら私に確認を取って、ファイルを移動してください
+
+4. GitHubにpush
+
+## 日々の使い方ガイド
+
+整理が終わったら、以下を伝えてください：
+
+「✅ タスク整理が完了しました。
+
+📌 明日からの使い方：
+- 思いついたことは全部 00_Inbox に放り込む
+  → 「これInboxに入れて」とClaude Codeに言うだけ
+- 週1回「Inboxを整理して」と言えばAIが分類してくれる
+- 毎日の判断（何をどう判断したか）をログに残しておくと、
+  Claude Codeに貼り付けるだけで同じ判断ができるようになる
+- 繰り返す作業はプロンプトとして型化する → それが自分だけの「スキル」になる
+
+💡 大事なこと：
+ログを残すことが全ての土台です。
+コンテキストが増えるほど、AIはあなたの業務を深く理解します。」</pre>
+  </div>
+</div>
+
+<div class="note note-tip">
+  🎯 <strong>今日のまとめ</strong><br>
+  <span style="color: var(--text-secondary);">
+    ① 自分の業務を分解した → どこにバリューを出すかが見えた<br>
+    ② 自動化の第一歩を踏み出した → 明日から使える成果物がある<br>
+    ③ コンテキストをVaultに残した → AIが自分の業務を理解している<br><br>
+    <strong style="color: var(--text-primary);">1ヶ月後に生産性10倍。その土台が、今日できました。</strong>
+  </span>
+</div>
+
+</div><!-- /container -->
+
+<script>
+function copyText(btn) {
+  const pre = btn.parentElement.querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    btn.textContent = 'コピー済み！';
+    setTimeout(() => btn.textContent = 'コピー', 2000);
+  });
+}
+</script>
+
+</body>
+</html>
