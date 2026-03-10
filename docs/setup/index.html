@@ -1713,7 +1713,7 @@ if(sessionStorage.getItem('auth')==='ok'){
           <div style="padding:1.5rem; background:var(--bg-tertiary); border-radius:12px; border-left:3px solid var(--accent-primary); margin-top:1rem;">
             <ol style="padding-left:1.5rem; color:var(--text-secondary);">
               <li style="margin-bottom:0.75rem;">Obsidianを起動</li>
-              <li style="margin-bottom:0.75rem;">「<strong style="color:var(--text-primary);">Create new vault</strong>」をクリック</li>
+              <li style="margin-bottom:0.75rem;">「<strong style="color:var(--text-primary);">Create new vault</strong>」（日本語表示の場合は「新しい保管庫を作成」）をクリック</li>
               <li style="margin-bottom:0.75rem;">Vault name: <code style="background:var(--bg-primary); padding:0.2rem 0.5rem; border-radius:4px;">MyVault</code>（好きな名前でOK）</li>
               <li style="margin-bottom:0.75rem;">Location: <strong>「書類」（Documents）フォルダ</strong>を選択</li>
               <li>「Create」をクリック</li>
@@ -1774,7 +1774,7 @@ if(sessionStorage.getItem('auth')==='ok'){
             <h4 style="margin:2rem 0 1rem; color:var(--text-primary);">③ Codeタブを開いてVaultを選択</h4>
             <ol style="padding-left:1.5rem; color:var(--text-secondary);">
               <li style="margin-bottom:0.75rem;">上部メニューから <strong style="color:var(--text-primary);">「Code」タブ</strong> をクリック</li>
-              <li style="margin-bottom:0.75rem;">「Select folder」で、STEP 3で作成した <strong>Vaultフォルダ</strong> を選ぶ</li>
+              <li style="margin-bottom:0.75rem;">「Select folder」で、STEP 3で作成した <strong>Vaultフォルダ</strong> を選ぶ<br><span style="color:var(--text-muted); font-size:0.85em;">（「書類」→「MyVault」の中です。STEP 3で選んだ場所を思い出してください）</span></li>
               <li>「このフォルダを信頼しますか？」→ <strong style="color:var(--text-primary);">「はい」</strong></li>
             </ol>
             <div style="margin-top:1rem; padding:0.75rem 1rem; background:rgba(99,102,241,0.1); border-radius:8px; font-size:0.9rem;">
@@ -1795,7 +1795,7 @@ if(sessionStorage.getItem('auth')==='ok'){
         <!-- STEP: 初期セットアップ -->
         <div class="setup-step" id="step-setup">
           <h3><span class="snum">7</span> Claude Codeで初期セットアップ <span style="color:#22c55e; font-size:0.8em;">🎉 ここからAIにお任せ！</span></h3>
-          <p style="color:var(--text-secondary); margin:1rem 0;">Claude Codeでさっき作ったVaultフォルダを開いて、以下のプロンプトをそのまま送ってください。</p>
+          <p style="color:var(--text-secondary); margin:1rem 0;">Claude Codeの画面下部にある入力欄に、以下のプロンプトをペーストして送信してください。<br><span style="color:var(--text-muted); font-size:0.9em;">（右上の「コピー」ボタンでクリップボードにコピーできます）</span></p>
 
           <div id="setup-method-desktop">
             <p style="color:var(--text-muted); margin-bottom:1rem;" id="vault-path-hint"></p>
@@ -2345,6 +2345,19 @@ claude</pre>
     const num = step.querySelector('.snum');
     if (num) num.textContent = i + 1;
   });
+
+  // 所要時間の見積もり表示
+  let minutes = 20; // ベース（Vault作成+Desktop+セットアップ+コンテキスト）
+  if (!hasClaude) minutes += 10;
+  if (!hasObsidian) minutes += 5;
+  if (!hasGithub) minutes += 5;
+  if (!isMac) minutes += 5; // Git for Windows
+  if (!isDesktop) minutes += 5; // CLI手順は少し長い
+  
+  const timeEl = document.createElement('div');
+  timeEl.style.cssText = 'text-align:center; margin:1.5rem 0 0.5rem; padding:1rem; background:rgba(99,102,241,0.1); border-radius:12px; font-size:1rem;';
+  timeEl.innerHTML = '⏱️ あなたの場合の所要時間目安：<strong style="color:var(--accent-primary);">約' + minutes + '分</strong>';
+  guide.insertBefore(timeEl, guide.firstChild);
 
   guide.scrollIntoView({ behavior: 'smooth' });
 }
