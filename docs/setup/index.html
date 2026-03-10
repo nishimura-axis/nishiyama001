@@ -1686,7 +1686,7 @@ if(sessionStorage.getItem('auth')==='ok'){
               <li style="margin-bottom:0.75rem;">「Sign Up」からアカウントを作成（会社のメールアドレスでOK）</li>
               <li style="margin-bottom:0.75rem;">ログイン後、左下のアイコン → 「Upgrade」</li>
               <li style="margin-bottom:0.75rem;"><strong style="color:#ef4444;">Max（月$100 ≒ 約15,000円）を選択</strong></li>
-              <li>クレジットカード情報を入力して契約完了</li>
+              <li>クレジットカード情報を入力して契約完了<br><span style="color:var(--text-muted); font-size:0.85em;">💳 支払い方法がわからない場合は西村に聞いてください</span></li>
             </ol>
             <div style="margin-top:1rem; padding:0.75rem 1rem; background:rgba(239,68,68,0.1); border-radius:8px; font-size:0.9rem;">
               ⚠️ ProではなくMaxを選んでください。Proだと使用量の上限にすぐ到達します。
@@ -1715,7 +1715,7 @@ if(sessionStorage.getItem('auth')==='ok'){
               <li style="margin-bottom:0.75rem;">Obsidianを起動</li>
               <li style="margin-bottom:0.75rem;">「<strong style="color:var(--text-primary);">Create new vault</strong>」をクリック</li>
               <li style="margin-bottom:0.75rem;">Vault name: <code style="background:var(--bg-primary); padding:0.2rem 0.5rem; border-radius:4px;">MyVault</code>（好きな名前でOK）</li>
-              <li style="margin-bottom:0.75rem;">Location: <strong>ドキュメントフォルダ</strong>を選択</li>
+              <li style="margin-bottom:0.75rem;">Location: <strong>「書類」（Documents）フォルダ</strong>を選択</li>
               <li>「Create」をクリック</li>
             </ol>
             <div style="margin-top:1rem; padding:0.75rem 1rem; background:rgba(99,102,241,0.1); border-radius:8px; font-size:0.9rem;">
@@ -1781,7 +1781,7 @@ if(sessionStorage.getItem('auth')==='ok'){
               💡 「Code」タブがClaude Codeです。ここから日本語で指示を出すだけで、ファイル作成・編集・Git操作すべてをAIが実行します。
             </div>
             <div style="margin-top:0.5rem; padding:0.75rem 1rem; background:rgba(239,68,68,0.1); border-radius:8px; font-size:0.9rem;">
-              ⚠️ 「Code」タブが見つからない場合は、アプリを最新版にアップデートしてください。
+              ⚠️ 「Code」タブが見つからない場合 → アプリ上部メニュー「Claude」→「Check for Updates」で最新版にアップデートしてください。（Windowsの場合は再ダウンロード）
             </div>
           </div>
         </div>
@@ -1929,13 +1929,15 @@ created: {{date}}
 
 以下の情報でGitを設定し、GitHubにプライベートリポジトリを作成して連携してください：
 
-- GitHubユーザー名: （ここは自分で入力してください）
-- メールアドレス: （GitHubに登録したメールを入力）
+⚠️ 以下の2箇所を自分の情報に書き換えてから送信してください：
+- GitHubユーザー名: 🔴ここにあなたのユーザー名を入力🔴
+- メールアドレス: 🔴GitHubに登録したメールを入力🔴
 - リポジトリ名: MyVault
 - 公開設定: private（非公開）
 
 GitHub認証にはブラウザベースの認証（gh auth login）を使ってください。
 ghコマンドがなければ先にインストールしてください。
+※ブラウザが開いたら「Authorize GitHub CLI」の画面で緑色の「Authorize」ボタンをクリックしてください。
 
 ## 5. 初回push
 
@@ -1954,10 +1956,10 @@ ghコマンドがなければ先にインストールしてください。
 よろしくお願いします！</pre>
           </div>
           <div style="margin-top:1rem; padding:0.75rem 1rem; background:rgba(239,68,68,0.1); border-radius:8px; font-size:0.9rem;">
-            ⚠️ AIが途中で「実行してよいですか？」と聞いてきたら「はい」と答えてください。
+            ⚠️ AIが途中で何度か「実行してよいですか？」と確認を求めてきます。すべて「はい」と答えてOKです。
           </div>
           <div style="margin-top:0.5rem; padding:0.75rem 1rem; background:rgba(99,102,241,0.1); border-radius:8px; font-size:0.9rem;">
-            💡 GitHub認証時にブラウザが開きます。画面の指示に従ってログインしてください。
+            💡 GitHub認証時にブラウザが自動で開きます。「Authorize GitHub CLI」という画面が出たら、緑色の「Authorize」ボタンをクリックしてください。
           </div>
         </div>
 
@@ -1984,7 +1986,7 @@ ghコマンドがなければ先にインストールしてください。
 ダウンロードフォルダのパスが不明な場合は聞いてください。</pre>
           </div>
           <div style="margin-top:0.5rem; padding:0.75rem 1rem; background:rgba(99,102,241,0.1); border-radius:8px; font-size:0.9rem;">
-            💡 AIがダウンロードフォルダの場所を聞いてきたら、そのまま答えてください。
+            💡 AIが自動でダウンロードフォルダを見つけて処理します。場所を聞かれた場合はそのまま答えてください。
           </div>
 
           <div style="margin-top:1.5rem; padding:1rem; background:var(--bg-secondary); border-radius:12px; border:1px solid var(--border-color);">
@@ -2008,6 +2010,10 @@ ghコマンドがなければ先にインストールしてください。
                 <li style="margin-bottom:0.5rem;">作業したら「GitHubにpushして」とAIに言う</li>
                 <li>コンテキスト（20_Context）が増えるほど、AIが賢くなる</li>
               </ul>
+              <p style="font-weight:600; margin-top:1.5rem; margin-bottom:0.75rem;">🚀 まず試してみよう：</p>
+              <p style="color:var(--text-secondary);">Claude Codeに以下を送ってみてください：</p>
+              <pre style="background:var(--bg-primary); border:1px solid var(--border-color); border-radius:8px; padding:1rem; margin:0.75rem 0; font-size:0.9rem; color:var(--text-secondary);">00_Inboxに「テスト」というファイルを作って、GitHubにpushしてください。</pre>
+              <p style="color:var(--text-secondary); font-size:0.9rem;">ファイルが作成されてpushされたら、あなたの第二の脳は完全に動いています！</p>
               <p style="margin-top:1.5rem; font-weight:600;">困ったら：西村まで。</p>
             </div>
           </div>
