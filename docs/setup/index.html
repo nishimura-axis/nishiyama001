@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第二の脳 セットアップガイド — AXIS</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --border: #2a2d3a;
+    --accent: #00d4aa;
+    --accent2: #FFD54F;
+    --text: #e8e8e8;
+    --muted: #8b8fa3;
+    --danger: #ff6b6b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    padding: 0 16px;
+  }
+  .container { max-width: 800px; margin: 0 auto; padding: 40px 0 80px; }
+  h1 {
+    font-size: 2em;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 48px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 { font-size: 1.1em; font-weight: 700; margin: 24px 0 8px; }
+  .subtitle { color: var(--muted); margin-bottom: 32px; font-size: 0.95em; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0;
+  }
+  .survey-q { margin: 16px 0; }
+  .survey-q label { display: block; font-weight: 600; margin-bottom: 8px; }
+  .survey-q .options { display: flex; gap: 12px; flex-wrap: wrap; }
+  .survey-q .options button {
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: all 0.2s;
+  }
+  .survey-q .options button:hover { border-color: var(--accent); }
+  .survey-q .options button.selected {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+    font-weight: 700;
+  }
+  .step {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0;
+  }
+  .step.skip { display: none; }
+  .step-number {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 900;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 32px;
+    margin-right: 8px;
+    font-size: 0.9em;
+  }
+  .step-title { font-weight: 700; font-size: 1.1em; }
+  .step-time { color: var(--muted); font-size: 0.85em; margin-left: 8px; }
+  pre {
+    background: #0d0f14;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 12px 0;
+    font-size: 0.9em;
+    line-height: 1.6;
+  }
+  code { font-family: 'SF Mono', 'Fira Code', monospace; }
+  .inline-code {
+    background: #252836;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .warn {
+    background: #2a2000;
+    border: 1px solid #554400;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 0.9em;
+  }
+  .warn::before { content: '⚠️ '; }
+  .tip {
+    background: #002a1a;
+    border: 1px solid #005533;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 0.9em;
+  }
+  .tip::before { content: '💡 '; }
+  ol, ul { padding-left: 24px; margin: 8px 0; }
+  li { margin: 6px 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .btn-start {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), #00b894);
+    color: var(--bg);
+    font-weight: 700;
+    padding: 14px 40px;
+    border-radius: 12px;
+    border: none;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: transform 0.2s;
+  }
+  .btn-start:hover { transform: scale(1.03); }
+  .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--border);
+    color: var(--text);
+    border: none;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.8em;
+    cursor: pointer;
+  }
+  .copy-btn:hover { background: var(--accent); color: var(--bg); }
+  .pre-wrap { position: relative; }
+  .hidden { display: none; }
+  .progress-bar {
+    display: flex;
+    gap: 4px;
+    margin: 24px 0;
+  }
+  .progress-bar .dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+  .progress-bar .dot.done { background: var(--accent); }
+  .progress-bar .dot.current { background: var(--accent2); }
+  img { max-width: 100%; border-radius: 8px; margin: 12px 0; }
+  @media (max-width: 600px) {
+    h1 { font-size: 1.5em; }
+    .container { padding: 24px 0 60px; }
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+<!-- ========== HERO ========== -->
+<h1>第二の脳 セットアップガイド</h1>
+<p class="subtitle">Obsidian × Claude Code × GitHub で実現する AI搭載ナレッジシステム</p>
+
+<div class="card">
+  <p><strong>今日のゴール</strong></p>
+  <p>Claude Codeで自分のVaultに書いて、GitHubにpushできる状態を作る。</p>
+  <p style="color: var(--muted); margin-top: 8px;">所要時間：約30分（環境による）</p>
+</div>
+
+<!-- ========== SURVEY ========== -->
+<h2>📋 まずは現在の状況を教えてください</h2>
+<p style="color: var(--muted); margin-bottom: 16px;">回答に応じて、あなたに必要なステップだけ表示します。</p>
+
+<div class="card" id="survey">
+  <div class="survey-q">
+    <label>Q1. パソコンのOSは？</label>
+    <div class="options" data-q="os">
+      <button onclick="answer('os','mac')">Mac</button>
+      <button onclick="answer('os','win')">Windows</button>
+    </div>
+  </div>
+
+  <div class="survey-q">
+    <label>Q2. Claude Pro / Max に契約していますか？</label>
+    <div class="options" data-q="claude">
+      <button onclick="answer('claude','yes')">契約済み</button>
+      <button onclick="answer('claude','no')">まだ</button>
+    </div>
+  </div>
+
+  <div class="survey-q">
+    <label>Q3. Obsidianをインストールしていますか？</label>
+    <div class="options" data-q="obsidian">
+      <button onclick="answer('obsidian','yes')">インストール済み</button>
+      <button onclick="answer('obsidian','no')">まだ</button>
+    </div>
+  </div>
+
+  <div class="survey-q">
+    <label>Q4. GitHubアカウントを持っていますか？</label>
+    <div class="options" data-q="github">
+      <button onclick="answer('github','yes')">持っている</button>
+      <button onclick="answer('github','no')">持っていない</button>
+    </div>
+  </div>
+
+  <div class="survey-q">
+    <label>Q5. Claude Codeの利用方法は？</label>
+    <div class="options" data-q="method">
+      <button onclick="answer('method','desktop')">Claude Desktopアプリ（おすすめ）</button>
+      <button onclick="answer('method','cli')">ターミナル / Cursor（既に使ってる人）</button>
+    </div>
+  </div>
+
+  <button class="btn-start" id="startBtn" onclick="generateGuide()" style="display:none;">
+    ▶ あなた専用のガイドを表示
+  </button>
+</div>
+
+<!-- ========== STEPS ========== -->
+<div id="guide" class="hidden">
+
+<h2>🚀 セットアップ開始</h2>
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- STEP: Claude Pro契約 -->
+<div class="step" id="step-claude" data-step="1">
+  <p><span class="step-number">1</span><span class="step-title">Claude Pro に契約する</span><span class="step-time">5分</span></p>
+  <ol>
+    <li>ブラウザで <a href="https://claude.ai" target="_blank">claude.ai</a> を開く</li>
+    <li>「Sign Up」からアカウントを作成（会社のメールアドレスでOK）</li>
+    <li>ログイン後、左下のアイコン → 「Upgrade to Pro」</li>
+    <li>Pro（月$20 ≒ 約3,000円）を選択</li>
+    <li>クレジットカード情報を入力して契約完了</li>
+  </ol>
+  <div class="tip">ProとMaxの違いは「使える量」だけ。最初はProで十分です。</div>
+</div>
+
+<!-- STEP: Obsidianインストール -->
+<div class="step" id="step-obsidian" data-step="2">
+  <p><span class="step-number">2</span><span class="step-title">Obsidianをインストールする</span><span class="step-time">5分</span></p>
+  <ol>
+    <li>ブラウザで <a href="https://obsidian.md" target="_blank">obsidian.md</a> を開く</li>
+    <li>「Get Obsidian for free」をクリック</li>
+    <li id="obsidian-os-note"></li>
+    <li>ダウンロードしたファイルを開いてインストール</li>
+  </ol>
+</div>
+
+<!-- STEP: Vault作成 -->
+<div class="step" id="step-vault" data-step="3">
+  <p><span class="step-number">3</span><span class="step-title">Vaultを作成する</span><span class="step-time">3分</span></p>
+  <ol>
+    <li>Obsidianを起動</li>
+    <li>「Create new vault」をクリック</li>
+    <li>Vault name: <span class="inline-code">MyVault</span>（好きな名前でOK）</li>
+    <li>Location: <strong>ドキュメントフォルダ</strong>を選択</li>
+    <li>「Create」をクリック</li>
+  </ol>
+  <div class="tip">作成したら一旦Obsidianは閉じてOK。この後の作業はClaude Codeで行います。</div>
+</div>
+
+<!-- STEP: GitHubアカウント作成 -->
+<div class="step" id="step-github" data-step="4">
+  <p><span class="step-number">4</span><span class="step-title">GitHubアカウントを作成する</span><span class="step-time">5分</span></p>
+  <ol>
+    <li>ブラウザで <a href="https://github.com" target="_blank">github.com</a> を開く</li>
+    <li>「Sign up」をクリック</li>
+    <li>メールアドレス（会社メールでOK）、パスワード、ユーザー名を入力</li>
+    <li>メールに届いた認証コードを入力</li>
+    <li>完了！</li>
+  </ol>
+</div>
+
+<!-- STEP: Git for Windows -->
+<div class="step" id="step-git-win" data-step="5">
+  <p><span class="step-number">5</span><span class="step-title">Git for Windowsをインストールする</span><span class="step-time">5分</span></p>
+  <ol>
+    <li>ブラウザで <a href="https://git-scm.com/downloads/win" target="_blank">git-scm.com/downloads/win</a> を開く</li>
+    <li>「Click here to download」をクリック</li>
+    <li>ダウンロードしたインストーラーを実行</li>
+    <li>すべてデフォルト設定のまま「Next」→「Install」</li>
+  </ol>
+  <div class="warn">Windowsの方のみ必要です。Macの方はGitが最初から入っています。</div>
+</div>
+
+<!-- STEP: Claude Desktop App -->
+<div class="step" id="step-desktop" data-step="6">
+  <p><span class="step-number">6</span><span class="step-title">Claude Desktopアプリをインストールする</span><span class="step-time">5分</span></p>
+  <ol>
+    <li>ブラウザで <a href="https://claude.ai/download" target="_blank">claude.ai/download</a> を開く</li>
+    <li id="desktop-os-note">お使いのOS用のアプリをダウンロード</li>
+    <li>ダウンロードしたファイルを開いてインストール</li>
+    <li>アプリを起動し、Claudeアカウントでログイン</li>
+    <li>左側メニューから「Code」タブをクリック</li>
+  </ol>
+  <div class="tip">「Code」タブがClaude Codeです。ここから自然な日本語で指示を出すだけで、ファイル作成・編集・Git操作すべてをAIが実行します。</div>
+</div>
+
+<!-- STEP: Claude Code CLI -->
+<div class="step" id="step-cli" data-step="6">
+  <p><span class="step-number">6</span><span class="step-title">Claude Code CLIをインストールする</span><span class="step-time">5分</span></p>
+  <div id="cli-instructions"></div>
+</div>
+
+<!-- STEP: 初期セットアップ -->
+<div class="step" id="step-setup" data-step="7">
+  <p><span class="step-number">7</span><span class="step-title">Claude Codeで初期セットアップ</span><span class="step-time">10分</span></p>
+  <p>Claude Codeでさっき作ったVaultフォルダを開いて、以下のプロンプトをそのまま送ってください。</p>
+
+  <div id="setup-method-desktop">
+    <h3>Vaultを開く</h3>
+    <ol>
+      <li>Claude Desktopアプリの「Code」タブを開く</li>
+      <li>プロジェクトフォルダの選択で、さっき作ったVaultフォルダを選ぶ<br>
+        <span style="color: var(--muted);" id="vault-path-hint"></span></li>
+    </ol>
+  </div>
+
+  <div id="setup-method-cli" class="hidden">
+    <h3>Vaultに移動する</h3>
+    <div class="pre-wrap">
+      <pre id="cd-command"></pre>
+    </div>
+    <p>移動したら <span class="inline-code">claude</span> で起動。</p>
+  </div>
+
+  <h3>以下をコピーして送信 ↓</h3>
+  <div class="pre-wrap">
+    <button class="copy-btn" onclick="copyText('setup-prompt')">コピー</button>
+    <pre id="setup-prompt"># 第二の脳 初期セットアップ
+
+私のObsidian Vaultを「第二の脳」として構築してください。
+
+## 1. フォルダ構造の作成
+
+以下のフォルダを作成してください：
+
+```
+00_Inbox/          ← とりあえず放り込む場所
+07_DailyLog/       ← 日々のログ（自動蓄積）
+10_Goals/          ← 目標管理
+20_Context/        ← 業務の前提情報（AIの知識ベース）
+30_Projects/       ← プロジェクト管理
+40_Knowledge/      ← 普遍的なノウハウ
+50_Literature/     ← 読書・記事メモ
+60_Templates/      ← テンプレート
+```
+
+各フォルダに .gitkeep を作成して、空フォルダもGitで管理できるようにしてください。
+
+## 2. テンプレートの作成
+
+60_Templates/ に以下のテンプレートを作成してください：
+
+### DailyLog.md
+```markdown
+---
+title: "Daily Log - {{date}}"
+type: daily
+date: {{date}}
+---
+
+# {{date}} Daily Log
+
+## 今日やったこと
+-
+
+## 学んだこと・気づき
+-
+
+## 明日やること
+-
+
+## メモ
+-
+```
+
+### Project.md
+```markdown
+---
+title: ""
+type: project
+status: planning
+progress: 0
+created: {{date}}
+updated: {{date}}
+---
+
+# プロジェクト名
+
+## 概要
+
+## 目標
+
+## タスク
+- [ ]
+
+## メモ
+```
+
+### Inbox.md
+```markdown
+---
+title: ""
+type: inbox
+created: {{date}}
+---
+
+# タイトル
+
+## 内容
+
+## 次のアクション
+```
+
+## 3. CLAUDE.md の作成
+
+~/.claude/CLAUDE.md に以下の内容を保存してください（ディレクトリがなければ作成）：
+
+```markdown
+# Global Rules
+
+## 言語
+- 日本語で応答する
+
+## 基本方針
+- 推測・創作を禁止。不明点は必ず質問する
+- 複数の解釈が可能な場合は確認する
+- セッション開始時にメモリファイルを読んでから応答
+- ユーザーの訂正や好みは即座に保存
+
+## ワークフロー: Plan → Execute
+1. まず計画を立てて確認する
+2. 承認されてから実行する
+3. スコープが逸れたら計画に戻る
+
+## 作業の可視化
+- 各ステップの前後でフェーズを表示する
+- 失敗したら正確なエラーを表示する
+
+## コーディング原則
+- 既存のアーキテクチャとパターンに従う
+- 依頼されていない機能追加やリファクタリングはしない
+- 秘密情報をコードにハードコードしない
+```
+
+## 4. Git初期設定とGitHub連携
+
+以下の情報でGitを設定し、GitHubにプライベートリポジトリを作成して連携してください：
+
+- GitHubユーザー名: （ここは自分で入力してください）
+- メールアドレス: （GitHubに登録したメールを入力）
+- リポジトリ名: MyVault
+- 公開設定: private（非公開）
+
+GitHub認証にはブラウザベースの認証（gh auth login）を使ってください。
+
+## 5. 初回push
+
+設定が完了したら、すべてのファイルをcommitしてGitHubにpushしてください。
+コミットメッセージは「初期セットアップ完了」としてください。
+
+## 6. 動作確認
+
+以下を確認して結果を教えてください：
+- [ ] フォルダ構造が正しく作成されている
+- [ ] テンプレートが60_Templates/に存在する
+- [ ] CLAUDE.mdが~/.claude/に保存されている
+- [ ] GitHubにリポジトリが作成されている
+- [ ] pushが成功している
+
+よろしくお願いします！</pre>
+  </div>
+
+  <div class="warn">AIが途中で「実行してよいですか？」と聞いてきたら「はい」と答えてください。</div>
+  <div class="tip">GitHub認証時にブラウザが開きます。画面の指示に従ってログインしてください。</div>
+</div>
+
+<!-- STEP: コンテキスト追加 -->
+<div class="step" id="step-context" data-step="8">
+  <p><span class="step-number">8</span><span class="step-title">業務コンテキストを追加する</span><span class="step-time">5分</span></p>
+  <p>講義で配布するコンテキストファイルをVaultに追加します。</p>
+  <ol>
+    <li>配布されたZIPファイルを展開</li>
+    <li>中の <span class="inline-code">context/Ads/</span> フォルダをそのまま <span class="inline-code">20_Context/</span> の中にコピー</li>
+    <li>Claude Codeで以下を送信：</li>
+  </ol>
+  <div class="pre-wrap">
+    <button class="copy-btn" onclick="copyText('context-prompt')">コピー</button>
+    <pre id="context-prompt">20_Context/Ads/ に業務コンテキストファイルが追加されました。
+内容を確認して、GitHubにcommit & pushしてください。
+コミットメッセージは「業務コンテキスト追加」で。</pre>
+  </div>
+</div>
+
+<!-- STEP: 動作確認ワーク -->
+<div class="step" id="step-work" data-step="9">
+  <p><span class="step-number">9</span><span class="step-title">実際に使ってみる</span><span class="step-time">10分</span></p>
+  <p>セットアップ完了！ここからが本番です。</p>
+
+  <h3>ワーク：頭の中のタスクを全部出す</h3>
+  <p>Claude Codeに以下を送ってみてください：</p>
+  <div class="pre-wrap">
+    <button class="copy-btn" onclick="copyText('work-prompt')">コピー</button>
+    <pre id="work-prompt">壁打ちしたいです。
+
+今、自分が抱えているタスクや考えていることを全部吐き出します。
+整理して、優先度をつけて、00_Inbox にファイルとして保存してください。
+
+---
+
+（ここに頭の中にあることを自由に書く）</pre>
+  </div>
+  <div class="tip">コツ：完璧に書こうとしなくてOK。箇条書きでもメモ書きでも、思いつくまま全部出してください。AIが整理してくれます。</div>
+
+  <h3>次にやること</h3>
+  <p>一番重いタスクを1つ選んで、Claude Codeと一緒に形にしてみましょう：</p>
+  <div class="pre-wrap">
+    <button class="copy-btn" onclick="copyText('work-prompt2')">コピー</button>
+    <pre id="work-prompt2">さっき整理したタスクの中で、一番インパクトが大きいものを1つ選んで、
+30_Projects/ にプロジェクトファイルを作成してください。
+
+目標・タスク分解・次のアクションまで一緒に考えたいです。</pre>
+  </div>
+</div>
+
+<!-- STEP: 完了 -->
+<div class="step" id="step-done" data-step="10">
+  <p><span class="step-number">✓</span><span class="step-title">セットアップ完了！</span></p>
+  <div class="card" style="border-color: var(--accent);">
+    <p><strong>🎉 おめでとうございます！</strong></p>
+    <p>あなたの「第二の脳」が動き始めました。</p>
+    <br>
+    <p><strong>これから意識すること：</strong></p>
+    <ul>
+      <li>思いついたことは全部Vaultに放り込む（00_Inbox）</li>
+      <li>Claude Codeと壁打ちしながら整理する</li>
+      <li>作業したら <span class="inline-code">GitHubにpushして</span> とAIに言う</li>
+      <li>コンテキスト（20_Context）が増えるほど、AIが賢くなる</li>
+    </ul>
+    <br>
+    <p><strong>困ったら：</strong>西村まで。</p>
+  </div>
+</div>
+
+</div><!-- /guide -->
+
+</div><!-- /container -->
+
+<script>
+const answers = {};
+const required = ['os', 'claude', 'obsidian', 'github', 'method'];
+
+function answer(q, val) {
+  answers[q] = val;
+  const btns = document.querySelector(`[data-q="${q}"]`).querySelectorAll('button');
+  btns.forEach(b => b.classList.remove('selected'));
+  event.target.classList.add('selected');
+  
+  // Check if all answered
+  const allAnswered = required.every(k => answers[k]);
+  document.getElementById('startBtn').style.display = allAnswered ? 'inline-block' : 'none';
+}
+
+function generateGuide() {
+  const guide = document.getElementById('guide');
+  guide.classList.remove('hidden');
+  
+  const isMac = answers.os === 'mac';
+  const isWin = answers.os === 'win';
+  const hasClaude = answers.claude === 'yes';
+  const hasObsidian = answers.obsidian === 'yes';
+  const hasGithub = answers.github === 'yes';
+  const isDesktop = answers.method === 'desktop';
+  
+  // Toggle steps
+  if (hasClaude) document.getElementById('step-claude').classList.add('skip');
+  if (hasObsidian) document.getElementById('step-obsidian').classList.add('skip');
+  if (hasGithub) document.getElementById('step-github').classList.add('skip');
+  if (isMac) document.getElementById('step-git-win').classList.add('skip');
+  
+  if (isDesktop) {
+    document.getElementById('step-cli').classList.add('skip');
+  } else {
+    document.getElementById('step-desktop').classList.add('skip');
+  }
+  
+  // OS-specific notes
+  const obsNote = document.getElementById('obsidian-os-note');
+  obsNote.textContent = isMac ? 'Download for macOS をクリック' : 'Download for Windows をクリック';
+  
+  // Desktop OS note
+  const deskNote = document.getElementById('desktop-os-note');
+  deskNote.textContent = isMac ? 'macOS用のアプリをダウンロード' : 'Windows用のアプリをダウンロード';
+  
+  // CLI instructions
+  const cliDiv = document.getElementById('cli-instructions');
+  if (isMac) {
+    cliDiv.innerHTML = `
+      <ol>
+        <li>ターミナルを開く（Command + スペース → 「ターミナル」と入力）</li>
+        <li>以下をコピーして貼り付けてEnter：</li>
+      </ol>
+      <div class="pre-wrap"><pre>curl -fsSL https://claude.ai/install.sh | bash</pre></div>
+      <ol start="3">
+        <li>インストール完了後、以下を実行：</li>
+      </ol>
+      <div class="pre-wrap"><pre>source ~/.zshrc</pre></div>
+      <ol start="4">
+        <li>確認：</li>
+      </ol>
+      <div class="pre-wrap"><pre>claude --version</pre></div>
+      <p>バージョン番号が表示されたら成功！</p>`;
+  } else {
+    cliDiv.innerHTML = `
+      <ol>
+        <li>PowerShellを開く（スタートメニュー → 「PowerShell」と検索）</li>
+        <li>以下をコピーして貼り付けてEnter：</li>
+      </ol>
+      <div class="pre-wrap"><pre>irm https://claude.ai/install.ps1 | iex</pre></div>
+      <ol start="3">
+        <li>確認：</li>
+      </ol>
+      <div class="pre-wrap"><pre>claude --version</pre></div>
+      <p>バージョン番号が表示されたら成功！</p>
+      <div class="warn">事前にGit for Windowsのインストールが必要です。</div>`;
+  }
+  
+  // Vault path hint
+  const pathHint = document.getElementById('vault-path-hint');
+  pathHint.textContent = isMac 
+    ? '例: /Users/あなたの名前/Documents/MyVault' 
+    : '例: C:\\Users\\あなたの名前\\Documents\\MyVault';
+  
+  // CD command
+  const cdCmd = document.getElementById('cd-command');
+  cdCmd.textContent = isMac 
+    ? 'cd ~/Documents/MyVault\nclaude' 
+    : 'cd $HOME\\Documents\\MyVault\nclaude';
+  
+  // Method-specific setup
+  if (isDesktop) {
+    document.getElementById('setup-method-cli').classList.add('hidden');
+    document.getElementById('setup-method-desktop').classList.remove('hidden');
+  } else {
+    document.getElementById('setup-method-desktop').classList.add('hidden');
+    document.getElementById('setup-method-cli').classList.remove('hidden');
+  }
+  
+  // Renumber visible steps
+  const visibleSteps = guide.querySelectorAll('.step:not(.skip)');
+  visibleSteps.forEach((step, i) => {
+    const num = step.querySelector('.step-number');
+    if (num) num.textContent = i + 1;
+  });
+  
+  // Progress bar
+  const bar = document.getElementById('progressBar');
+  bar.innerHTML = '';
+  visibleSteps.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    bar.appendChild(dot);
+  });
+  
+  // Scroll to guide
+  guide.scrollIntoView({ behavior: 'smooth' });
+}
+
+function copyText(id) {
+  const text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = event.target;
+    btn.textContent = 'コピー済み！';
+    setTimeout(() => btn.textContent = 'コピー', 2000);
+  });
+}
+</script>
+
+</body>
+</html>
