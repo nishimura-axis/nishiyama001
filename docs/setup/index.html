@@ -1620,7 +1620,7 @@ if(sessionStorage.getItem('auth')==='ok'){
                         <td class="highlight">Git初期設定</td>
                     </tr>
                     <tr>
-                        <td>アクセストークンの取得</td>
+                        <td>GitHub認証（ブラウザでログイン）</td>
                         <td class="highlight">リポジトリ作成・連携</td>
                     </tr>
                     <tr>
@@ -1660,27 +1660,37 @@ if(sessionStorage.getItem('auth')==='ok'){
                 </div>
             </div>
 
-            <!-- STEP 2: Claude Codeのインストール -->
+            <!-- STEP 2: Claude Max契約 + Desktopインストール -->
             <div class="step">
                 <div class="step-content">
-                    <h3>Claude Codeのインストール</h3>
-                    <p>Claude Desktopアプリをインストールします。ターミナル不要。</p>
-                    <span class="step-time">⏱️ 約5分</span>
+                    <h3>Claude Max契約 + Desktopアプリのインストール</h3>
+                    <p>Claude Desktopアプリをインストールします。<strong style="color: var(--accent-primary);">ターミナル不要です。</strong></p>
+                    <span class="step-time">⏱️ 約10分</span>
                     
                     <div style="margin-top: 1.5rem; padding: 1.5rem; background: var(--bg-tertiary); border-radius: 12px; border-left: 3px solid var(--accent-primary);">
+                        <h4 style="margin-bottom: 1rem; color: var(--text-primary);">① Claude Maxに契約</h4>
+                        <ol style="margin: 0; padding-left: 1.5rem; color: var(--text-secondary);">
+                            <li style="margin-bottom: 0.75rem;">ブラウザで <a href="https://claude.ai" target="_blank" style="color: var(--accent-primary);">https://claude.ai</a> にアクセス</li>
+                            <li style="margin-bottom: 0.75rem;">「Sign Up」からアカウントを作成（会社のメールでOK）</li>
+                            <li style="margin-bottom: 0.75rem;">ログイン後、左下のアイコン →「Upgrade」</li>
+                            <li style="margin-bottom: 0.75rem;"><strong style="color: #ef4444;">Max（月$100 ≒ 約15,000円）を選択</strong>
+                                <br><span style="color: var(--text-muted); font-size: 0.85em;">⚠️ ProではなくMaxを選んでください。Proだと使用量の上限にすぐ到達します。</span></li>
+                            <li style="margin-bottom: 0;">クレジットカード情報を入力して契約完了</li>
+                        </ol>
+                        
+                        <h4 style="margin: 2rem 0 1rem; color: var(--text-primary);">② Desktopアプリをインストール</h4>
                         <ol style="margin: 0; padding-left: 1.5rem; color: var(--text-secondary);">
                             <li style="margin-bottom: 0.75rem;">ブラウザで <a href="https://claude.ai/download" target="_blank" style="color: var(--accent-primary);">https://claude.ai/download</a> にアクセス</li>
-                            <li style="margin-bottom: 0.75rem;">画面中央の「<strong style="color: var(--text-primary);">Download</strong>」ボタンをクリック</li>
-                            <li style="margin-bottom: 0.75rem;">自動でダウンロードが始まります</li>
-                            <li style="margin-bottom: 0.75rem;">ダウンロードしたファイルをダブルクリックして開く</li>
-                            <li style="margin-bottom: 0.75rem;">画面の指示に従ってインストール</li>
-                            <li style="margin-bottom: 0;"><strong style="color: var(--text-primary);">初回起動時のアカウント作成</strong>
-                                <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
-                                    <li>「Sign in」をクリック</li>
-                                    <li>「<strong>Continue with Google</strong>」を選択（Googleアカウントで簡単にログインできます）</li>
-                                    <li>または、メールアドレスで新規登録</li>
-                                </ul>
-                            </li>
+                            <li style="margin-bottom: 0.75rem;">お使いのOS用のアプリをダウンロード</li>
+                            <li style="margin-bottom: 0.75rem;">ダウンロードしたファイルを開いてインストール</li>
+                        </ol>
+
+                        <h4 style="margin: 2rem 0 1rem; color: var(--text-primary);">③ 起動・ログイン</h4>
+                        <ol style="margin: 0; padding-left: 1.5rem; color: var(--text-secondary);">
+                            <li style="margin-bottom: 0.75rem;">アプリを起動</li>
+                            <li style="margin-bottom: 0.75rem;">Claudeアカウントでログイン</li>
+                            <li style="margin-bottom: 0.75rem;">ブラウザが開いたら「<strong style="color: var(--text-primary);">Authorize</strong>」（承認）をクリック</li>
+                            <li style="margin-bottom: 0;">「Success!」と表示されたらブラウザを閉じてアプリに戻る</li>
                         </ol>
                     </div>
                 </div>
@@ -1714,20 +1724,26 @@ if(sessionStorage.getItem('auth')==='ok'){
             <div class="step">
                 <div class="step-content">
                     <h3>Claude CodeでVaultを開く</h3>
-                    <p>Claude Codeを起動して、作成したVaultフォルダを開きます。</p>
+                    <p>Claude DesktopアプリのCodeタブで、作成したVaultを開きます。</p>
                     <span class="step-time">⏱️ 約2分</span>
                     
                     <div style="margin-top: 1.5rem; padding: 1.5rem; background: var(--bg-tertiary); border-radius: 12px; border-left: 3px solid var(--accent-primary);">
                         <ol style="margin: 0; padding-left: 1.5rem; color: var(--text-secondary);">
-                            <li style="margin-bottom: 0.75rem;">Claude Codeを起動</li>
-                            <li style="margin-bottom: 0.75rem;">「<strong style="color: var(--text-primary);">File</strong>」メニュー →「<strong style="color: var(--text-primary);">Open Folder</strong>」を選択</li>
-                            <li style="margin-bottom: 0.75rem;">STEP 3で作成したVaultフォルダを選択
+                            <li style="margin-bottom: 0.75rem;">Claude Desktopアプリを開く</li>
+                            <li style="margin-bottom: 0.75rem;">上部メニューから「<strong style="color: var(--text-primary);">Code</strong>」タブをクリック</li>
+                            <li style="margin-bottom: 0.75rem;">「<strong style="color: var(--text-primary);">Select folder</strong>」をクリックして、STEP 3で作成したVaultフォルダを選択
                                 <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
                                     <li>例：<code style="background: var(--bg-primary); padding: 0.2rem 0.5rem; border-radius: 4px;">ドキュメント/MyVault</code></li>
                                 </ul>
                             </li>
-                            <li style="margin-bottom: 0;">「Open」をクリック</li>
+                            <li style="margin-bottom: 0;">「このフォルダを信頼しますか？」→「<strong style="color: var(--text-primary);">はい</strong>」</li>
                         </ol>
+                    </div>
+                    <div style="margin-top: 1rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 8px; font-size: 0.9rem;">
+                        💡 「Code」タブがClaude Codeです。ここから日本語で指示を出すだけで、ファイル作成・編集・Git操作すべてをAIが実行します。
+                    </div>
+                    <div style="margin-top: 0.75rem; padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 8px; font-size: 0.9rem;">
+                        ⚠️ 「Code」タブが見つからない場合は、アプリを最新版にアップデートしてください。
                     </div>
                 </div>
             </div>
@@ -1757,38 +1773,7 @@ if(sessionStorage.getItem('auth')==='ok'){
                 </div>
             </div>
 
-            <!-- STEP 6: アクセストークン取得 -->
-            <div class="step">
-                <div class="step-content">
-                    <h3>アクセストークンの取得 <span style="color: #ef4444; font-size: 0.8em;">⚠️ 重要</span></h3>
-                    <p>AIがGitHubを操作するためのトークンを取得します。<strong style="color: var(--accent-primary);">このステップだけは手動で行う必要があります。</strong></p>
-                    <span class="step-time">⏱️ 約5分</span>
-                    
-                    <div style="margin-top: 1.5rem; padding: 1.5rem; background: var(--bg-tertiary); border-radius: 12px; border-left: 3px solid #ef4444;">
-                        <ol style="margin: 0; padding-left: 1.5rem; color: var(--text-secondary);">
-                            <li style="margin-bottom: 0.75rem;">GitHubにログインした状態で、以下のURLにアクセス：<br>
-                                <a href="https://github.com/settings/tokens/new" target="_blank" style="color: var(--accent-primary); word-break: break-all;">https://github.com/settings/tokens/new</a>
-                            </li>
-                            <li style="margin-bottom: 0.75rem;">以下を入力：
-                                <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
-                                    <li><strong>Note</strong>: <code style="background: var(--bg-primary); padding: 0.2rem 0.5rem; border-radius: 4px;">MyVault-ClaudeCode</code>（何でもOK、識別用）</li>
-                                    <li><strong>Expiration</strong>: 「<strong style="color: var(--text-primary);">No expiration</strong>」を選択（無期限）</li>
-                                    <li><strong>Select scopes</strong>: 以下にチェック ✅
-                                        <ul style="margin-top: 0.25rem;">
-                                            <li><code style="background: var(--bg-primary); padding: 0.2rem 0.5rem; border-radius: 4px;">repo</code>（一番上、すべての repo 権限）</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li style="margin-bottom: 0.75rem;">画面下部の「<strong style="color: var(--text-primary);">Generate token</strong>」をクリック</li>
-                            <li style="margin-bottom: 0; padding: 1rem; background: rgba(239, 68, 68, 0.1); border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.3);">
-                                <strong style="color: #ef4444;">⚠️ 重要：</strong>表示されたトークン（<code style="background: var(--bg-primary); padding: 0.2rem 0.5rem; border-radius: 4px;">ghp_</code> で始まる文字列）をコピーして安全な場所に保存<br>
-                                <span style="font-size: 0.9em; color: var(--text-muted);">※このトークンは<strong>一度しか表示されません</strong>。メモ帳などに一時的に貼り付けておいてください。</span>
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
+            <!-- STEP 6 は不要（GitHub認証はAIがブラウザ経由で自動処理） -->
 
             <!-- STEP 7: AIに初期セットアップを依頼 -->
             <div class="step">
@@ -1813,13 +1798,14 @@ if(sessionStorage.getItem('auth')==='ok'){
 ### 1. フォルダ構造の作成
 以下のフォルダを作成してください：
 - 00_Inbox（とりあえず放り込む場所）
+- 07_DailyLog（日々のログ）
 - 10_Goals（目標管理）
 - 20_Context（業務の前提情報）
 - 30_Projects（プロジェクト管理）
 - 40_Knowledge（普遍的なノウハウ）
 - 50_Literature（読書・記事メモ）
 - 60_Templates（テンプレート）
-- 70_Meetings（MTGログ）
+
 
 ### 2. CLAUDE.md の作成
 以下の内容で `CLAUDE.md` を作成してください：
@@ -1973,8 +1959,8 @@ MyVault/
 以下の情報でGitを設定し、GitHubにリポジトリを作成して連携してください：
 
 - GitHubユーザー名: （ここにあなたのユーザー名を入力）
-- メールアドレス: （ここにGitHubに登録したメールを入力）
-- アクセストークン: （ここにSTEP6で取得したトークンを貼り付け）
+- メールアドレス: （GitHubに登録したメールを入力）
+- GitHub認証: ghコマンドがなければインストールして、gh auth login でブラウザ認証してください
 - リポジトリ名: MyVault
 - リポジトリの公開設定: private（非公開）
 
@@ -2018,6 +2004,47 @@ MyVault/
                 </div>
             </div>
         </div>
+
+        <!-- コンテキスト追加ステップ -->
+        <div class="step">
+            <div class="step-content">
+                <h3>業務コンテキストを追加する</h3>
+                <p>アド事業部の業務コンテキストをVaultに追加します。これがAIの「前提知識」になります。</p>
+                <span class="step-time">⏱️ 約5分</span>
+                
+                <div style="margin-top: 1.5rem; text-align: center;">
+                    <a href="context-ads.zip" download style="display:inline-flex; align-items:center; gap:0.5rem; padding:1rem 2rem; background:var(--accent-gradient); color:white; border-radius:12px; font-weight:500; text-decoration:none; box-shadow:var(--glow);">
+                        📥 コンテキストファイルをダウンロード（ZIP）
+                    </a>
+                </div>
+
+                <div style="margin-top: 1.5rem; padding: 1.5rem; background: var(--bg-tertiary); border-radius: 12px; border-left: 3px solid var(--accent-primary);">
+                    <p style="color: var(--text-primary); font-weight: 500; margin-bottom: 1rem;">ダウンロードしたら、Claude Codeに以下を送信：</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> コピー</button>
+                        <pre>ダウンロードフォルダに context-ads.zip があります。
+
+以下をやってください：
+1. ZIPを展開して、中の .md ファイル（10個）を 20_Context/Ads/ にコピー
+2. コピーしたファイルの一覧を表示
+3. GitHubにcommit & push（コミットメッセージ：「業務コンテキスト追加」）
+
+ダウンロードフォルダのパスが不明な場合は聞いてください。</pre>
+                    </div>
+                </div>
+                <div style="margin-top: 1rem; padding: 1rem; background: rgba(99, 102, 241, 0.1); border-radius: 8px; font-size: 0.9rem;">
+                    💡 AIがダウンロードフォルダの場所を聞いてきたら、そのまま答えてください。
+                </div>
+            </div>
+        </div>
+
+        <!-- CLAUDE.md フル版リンク -->
+        <div style="margin: 2rem 0; padding: 1.5rem; background: var(--bg-secondary); border-radius: 16px; border: 1px solid var(--border-color);">
+            <h4 style="margin-bottom: 0.5rem;">📄 上級者向け：CLAUDE.md フル版テンプレート</h4>
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">AIの動作をさらに細かく設定したい方はこちらを参考にしてください。</p>
+            <a href="CLAUDE-template.md" target="_blank" style="color: var(--accent-primary); text-decoration: none;">CLAUDE.md フル版テンプレートを見る →</a>
+        </div>
+
         </div><!-- /beginner-content -->
 
         <!-- 経験者向けコンテンツ -->
@@ -2038,7 +2065,7 @@ MyVault/
                         <td class="highlight">Vaultフォルダ構造の作成</td>
                     </tr>
                     <tr>
-                        <td>アクセストークンの確認</td>
+                        <td>GitHub認証（ブラウザでログイン）</td>
                         <td class="highlight">Git初期設定・リポジトリ連携</td>
                     </tr>
                     <tr>
@@ -2122,31 +2149,7 @@ MyVault/
                 </div>
             </div>
 
-            <!-- STEP 4: アクセストークンの確認 -->
-            <div class="step">
-                <div class="step-content">
-                    <h3>アクセストークンの確認 <span style="color: #ef4444; font-size: 0.8em;">⚠️ 重要</span></h3>
-                    <p>既存のトークンを使うか、新しく発行するか選んでください。</p>
-                    <span class="step-time">⏱️ 約3分</span>
-                    
-                    <div style="margin-top: 1.5rem; padding: 1.5rem; background: var(--bg-tertiary); border-radius: 12px; border-left: 3px solid var(--accent-primary);">
-                        <p style="color: var(--text-primary); font-weight: 500; margin-bottom: 1rem;">🔹 既存のトークンを使う場合</p>
-                        <ul style="margin: 0 0 1.5rem; padding-left: 1.5rem; color: var(--text-secondary);">
-                            <li style="margin-bottom: 0.5rem;">保存しているトークンに <code style="background: var(--bg-primary); padding: 0.2rem 0.5rem; border-radius: 4px;">repo</code> 権限があればそのまま使えます</li>
-                            <li style="margin-bottom: 0;">トークンを控えておいてください</li>
-                        </ul>
-                        
-                        <p style="color: var(--text-primary); font-weight: 500; margin-bottom: 1rem;">🔹 新しく発行する場合</p>
-                        <ol style="margin: 0; padding-left: 1.5rem; color: var(--text-secondary);">
-                            <li style="margin-bottom: 0.5rem;"><a href="https://github.com/settings/tokens/new" target="_blank" style="color: var(--accent-primary);">https://github.com/settings/tokens/new</a> にアクセス</li>
-                            <li style="margin-bottom: 0.5rem;"><strong>Note</strong>: <code style="background: var(--bg-primary); padding: 0.2rem 0.5rem; border-radius: 4px;">MyVault-ClaudeCode</code></li>
-                            <li style="margin-bottom: 0.5rem;"><strong>Expiration</strong>: 「No expiration」</li>
-                            <li style="margin-bottom: 0.5rem;"><strong>Select scopes</strong>: <code style="background: var(--bg-primary); padding: 0.2rem 0.5rem; border-radius: 4px;">repo</code> にチェック</li>
-                            <li style="margin-bottom: 0;">「Generate token」をクリックしてコピー</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
+            <!-- STEP 4: アクセストークン不要（GitHub認証はAIが自動処理） -->
 
             <!-- STEP 5: AIに初期セットアップを依頼 -->
             <div class="step">
@@ -2172,13 +2175,14 @@ MyVault/
 ### 1. フォルダ構造の作成
 以下のフォルダを作成してください：
 - 00_Inbox（とりあえず放り込む場所）
+- 07_DailyLog（日々のログ）
 - 10_Goals（目標管理）
 - 20_Context（業務の前提情報）
 - 30_Projects（プロジェクト管理）
 - 40_Knowledge（普遍的なノウハウ）
 - 50_Literature（読書・記事メモ）
 - 60_Templates（テンプレート）
-- 70_Meetings（MTGログ）
+
 
 ### 2. CLAUDE.md の作成
 以下の内容で `CLAUDE.md` を作成してください：
@@ -2257,8 +2261,8 @@ hd / axis-ads / axis-pr / weeva / fanmarketing / clay
 以下の情報でGitを設定し、GitHubにリポジトリを作成して連携してください：
 
 - GitHubユーザー名: （ここにあなたのユーザー名を入力）
-- メールアドレス: （ここにGitHubに登録したメールを入力）
-- アクセストークン: （ここに取得したトークンを貼り付け）
+- メールアドレス: （GitHubに登録したメールを入力）
+- GitHub認証: ghコマンドがなければインストールして、gh auth login でブラウザ認証してください
 - リポジトリ名: MyVault
 - リポジトリの公開設定: private（非公開）
 
