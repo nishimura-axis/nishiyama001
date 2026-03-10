@@ -181,6 +181,36 @@
 </head>
 <body>
 
+<div id="auth-gate" style="display:flex; justify-content:center; align-items:center; min-height:100vh;">
+  <div class="card" style="max-width:400px; text-align:center;">
+    <h2 style="margin-top:0; border:none;">🔒 パスワードを入力</h2>
+    <p style="color:var(--muted); margin-bottom:16px;">このページは社内限定です</p>
+    <input id="pw-input" type="password" placeholder="パスワード" 
+      style="width:100%; padding:12px; border-radius:8px; border:1px solid var(--border); background:var(--bg); color:var(--text); font-size:1em; margin-bottom:12px;"
+      onkeydown="if(event.key==='Enter')checkPw()">
+    <button onclick="checkPw()" style="width:100%; padding:12px; border-radius:8px; border:none; background:var(--accent); color:var(--bg); font-weight:700; font-size:1em; cursor:pointer;">入る</button>
+    <p id="pw-error" style="color:var(--danger); margin-top:8px; display:none;">パスワードが違います</p>
+  </div>
+</div>
+<script>
+function checkPw(){
+  const v=document.getElementById('pw-input').value;
+  if(v==='nishiyama'){
+    document.getElementById('auth-gate').style.display='none';
+    document.getElementById('main-content').style.display='block';
+    sessionStorage.setItem('auth','ok');
+  } else {
+    document.getElementById('pw-error').style.display='block';
+  }
+}
+if(sessionStorage.getItem('auth')==='ok'){
+  document.addEventListener('DOMContentLoaded',()=>{
+    document.getElementById('auth-gate').style.display='none';
+    document.getElementById('main-content').style.display='block';
+  });
+}
+</script>
+<div id="main-content" style="display:none;">
 <div class="container">
 
 <!-- ========== HERO ========== -->
@@ -586,6 +616,7 @@ GitHub認証にはブラウザベースの認証（gh auth login）を使って�
 </div><!-- /guide -->
 
 </div><!-- /container -->
+</div><!-- /main-content -->
 
 <script>
 const answers = {};
