@@ -155,6 +155,36 @@ h3 {
 </style>
 </head>
 <body>
+<!-- Password Gate -->
+<div id="auth-gate" style="display:flex; justify-content:center; align-items:center; min-height:100vh; position:fixed; top:0; left:0; right:0; bottom:0; background:var(--bg-primary); z-index:9999;">
+  <div style="background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:20px; padding:3rem; max-width:400px; text-align:center;">
+    <h2 style="font-size:1.5rem; margin-bottom:0.5rem;">🔒 パスワードを入力</h2>
+    <p style="color:var(--text-secondary); margin-bottom:1.5rem;">このページは社内限定です</p>
+    <input id="pw-input" type="password" placeholder="パスワード"
+      style="width:100%; padding:1rem; border-radius:12px; border:1px solid var(--border-color); background:var(--bg-primary); color:var(--text-primary); font-size:1rem; margin-bottom:1rem; font-family:'Noto Sans JP',sans-serif;"
+      onkeydown="if(event.key==='Enter')checkPw()">
+    <button onclick="checkPw()" style="width:100%; padding:1rem; background:var(--accent-gradient); color:white; border:none; border-radius:12px; font-weight:700; font-size:1rem; cursor:pointer;">入る</button>
+    <p id="pw-error" style="color:#ff6b6b; margin-top:0.75rem; display:none; font-size:0.9rem;">パスワードが違います</p>
+  </div>
+</div>
+<script>
+function checkPw(){
+  if(document.getElementById('pw-input').value==='nishiyama'){
+    document.getElementById('auth-gate').style.display='none';
+    document.getElementById('main-wrap').style.display='block';
+    sessionStorage.setItem('auth-work','ok');
+  } else {
+    document.getElementById('pw-error').style.display='block';
+  }
+}
+if(sessionStorage.getItem('auth-work')==='ok'){
+  document.addEventListener('DOMContentLoaded',()=>{
+    document.getElementById('auth-gate').style.display='none';
+    document.getElementById('main-wrap').style.display='block';
+  });
+}
+</script>
+<div id="main-wrap" style="display:none;">
 <div class="container">
 
 <h1>🎯 ワーク</h1>
@@ -428,6 +458,7 @@ My_Work_Profile.md のパターン判定結果を確認し、
 </div>
 
 </div><!-- /container -->
+</div><!-- /main-wrap -->
 
 <script>
 function copyText(btn) {
