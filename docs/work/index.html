@@ -403,7 +403,16 @@ My_Work_Profile.md のパターン判定結果を確認し、
 <h2>⚡ スプレッドシート連携スキル</h2>
 
 <p>Claude Code に新しい能力（スキル）を追加します。<br>
-これを設定すると、<strong>「シート確認して」「データ抽出して」</strong>と言うだけでスプレッドシートを操作できるようになります。</p>
+これを設定すると、<strong>「このシート確認して [URL]」</strong>のように指示するだけでスプレッドシートを操作できるようになります。</p>
+
+<div class="note note-warn">
+  ⚠️ <strong>事前準備が必要です</strong><br>
+  <span style="color:var(--text-secondary);">
+    アクセスしたいスプレッドシートの<strong>共有設定</strong>に、以下のメールアドレスを「編集者」として追加してください：<br>
+    <code style="background:rgba(0,0,0,0.3); padding:2px 8px; border-radius:4px;">claude-sheets@axis-ai-tools.iam.gserviceaccount.com</code><br>
+    共有されていないシートにはアクセスできません。
+  </span>
+</div>
 
 <div class="prompt-section">
   <h3>📋 Step 1：サービスアカウントキーを保存</h3>
