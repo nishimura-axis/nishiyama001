@@ -1965,9 +1965,12 @@ ghコマンドがなければ先にインストールしてください。
           <h3><span class="snum">8</span> 業務コンテキストを追加する <span style="color:var(--text-muted); font-size:0.8em;">⏱️ 5分</span></h3>
           <p style="color:var(--text-secondary); margin:1rem 0;">アド事業部の業務コンテキストをVaultに追加します。これがAIの「前提知識」になります。</p>
 
-          <div style="text-align:center; margin:1.5rem 0;">
+          <div style="text-align:center; margin:1.5rem 0; display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
             <a href="context-ads.zip" download style="display:inline-flex; align-items:center; gap:0.5rem; padding:1rem 2rem; background:var(--accent-gradient); color:white; border-radius:12px; font-weight:500; text-decoration:none; box-shadow:var(--glow);">
-              📥 コンテキストファイルをダウンロード（ZIP）
+              📥 コンテキストファイル（ZIP）
+            </a>
+            <a href="context-templates.zip" download style="display:inline-flex; align-items:center; gap:0.5rem; padding:1rem 2rem; background:linear-gradient(135deg, #059669 0%, #10b981 100%); color:white; border-radius:12px; font-weight:500; text-decoration:none; box-shadow:0 0 20px rgba(16,185,129,0.3);">
+              📥 テンプレート（ZIP）
             </a>
           </div>
 
@@ -1975,10 +1978,13 @@ ghコマンドがなければ先にインストールしてください。
             <button class="copy-btn" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> コピー</button>
             <pre>ダウンロードフォルダに context-ads.zip があります。
 
+ダウンロードフォルダにZIPが2つあります。
+
 以下をやってください：
-1. ZIPを展開して、中の .md ファイル（10個）を 20_Context/Ads/ にコピー
-2. コピーしたファイルの一覧を表示
-3. GitHubにcommit & push（コミットメッセージ：「業務コンテキスト追加」）
+1. context-ads.zip を展開して、中の .md ファイル（10個）を 20_Context/Ads/ にコピー
+2. context-templates.zip を展開して、中の .md ファイル（16個）を 60_Templates/ にコピー
+3. コピーしたファイルの一覧を表示
+4. GitHubにcommit & push（コミットメッセージ：「業務コンテキスト＋テンプレート追加」）
 
 ダウンロードフォルダのパスが不明な場合は聞いてください。</pre>
           </div>
