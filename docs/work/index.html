@@ -201,9 +201,10 @@ if(sessionStorage.getItem('auth-work')==='ok'){
     <tr><td>10:10-11:00</td><td>セットアップ</td><td></td></tr>
     <tr><td>11:00-12:00</td><td>稲葉さん講義（承認率）</td><td></td></tr>
     <tr><td>12:00-13:00</td><td>昼休憩 <span style="color:var(--text-muted);">※未完了者は居残りセットアップ</span></td><td></td></tr>
-    <tr class="highlight"><td>13:00-14:00</td><td><strong>ワーク第1層</strong>：業務の棚卸し</td><td><span class="tag tag-work">WORK</span></td></tr>
-    <tr class="highlight"><td>14:00-14:15</td><td><strong>共有タイム</strong>：何を自動化するか発表</td><td><span class="tag tag-share">SHARE</span></td></tr>
-    <tr class="highlight"><td>14:15-15:00</td><td><strong>ワーク第2層</strong>：自動化の実装</td><td><span class="tag tag-work">WORK</span></td></tr>
+    <tr class="highlight"><td>13:00-13:20</td><td><strong>スキル作成練習</strong>：スプレッドシート連携</td><td><span class="tag tag-work">WORK</span></td></tr>
+    <tr class="highlight"><td>13:20-14:15</td><td><strong>ワーク第1層</strong>：業務の棚卸し</td><td><span class="tag tag-work">WORK</span></td></tr>
+    <tr class="highlight"><td>14:15-14:30</td><td><strong>共有タイム</strong>：何を自動化するか発表</td><td><span class="tag tag-share">SHARE</span></td></tr>
+    <tr class="highlight"><td>14:30-15:00</td><td><strong>ワーク第2層</strong>：自動化の実装</td><td><span class="tag tag-work">WORK</span></td></tr>
     <tr><td>15:00</td><td>ここで終了OK 🏠</td><td></td></tr>
     <tr><td>15:00-16:00</td><td><strong>おまけ</strong>：タスク整理 + 日々の使い方</td><td><span class="tag tag-bonus">BONUS</span></td></tr>
   </tbody>
@@ -211,8 +212,79 @@ if(sessionStorage.getItem('auth-work')==='ok'){
 
 <hr class="divider">
 
+<!-- ========== SKILL ========== -->
+<h2>⚡ スキル作成練習：スプレッドシート連携（13:00-13:20）</h2>
+
+<p>Claude Code の「スキル」を作る練習です。<br>
+これを設定すると、<strong>「シート確認して」「データ抽出して」</strong>と言うだけでスプレッドシートを操作できるようになります。</p>
+
+<div class="prompt-section">
+  <h3>📋 Step 1：サービスアカウントキーを保存</h3>
+  <p style="color:var(--text-secondary);">西村からChatworkの個人チャットで送られたJSONとプロンプトを、そのままClaude Codeに送ってください。</p>
+  <div class="note note-info">💡 キーの保存が完了したら、下のStep 2に進んでください。</div>
+</div>
+
+<div class="prompt-section">
+  <h3>📋 Step 2：スプレッドシート連携スキルを作成</h3>
+  <div class="prompt-block">
+    <button class="copy-btn" onclick="copyText(this)">コピー</button>
+    <pre>Google Sheets にアクセスするためのスキルを作成してください。
+
+## 要件
+
+- ~/.config/gcp/claude-sheets-key.json のサービスアカウントを使う
+- Google Sheets API v4 を使用
+- Node.js (googleapis パッケージ) で実装
+
+## 作成するスキル
+
+以下のことができるスクリプトを作ってください：
+
+1. **シートの読み取り**: スプレッドシートIDと範囲を指定してデータ取得
+2. **シートへの書き込み**: スプレッドシートIDと範囲を指定してデータ書き込み
+3. **シート一覧の取得**: スプレッドシートID指定でシート名一覧取得
+
+## 保存先
+
+- スクリプト: ~/sheets-tool/index.js
+- package.json も作成して googleapis をインストール
+
+## 使い方の例
+
+完成したら、以下のように使えることを確認してください：
+- 「このスプレッドシートのデータを見せて」→ スプレッドシートのURLかIDを聞いて、データ取得
+- 「A1:C10の範囲にデータを書き込んで」→ 指定範囲にデータ書き込み
+
+## 重要
+
+スプレッドシートにアクセスするには、そのシートの共有設定に
+claude-sheets@axis-ai-tools.iam.gserviceaccount.com
+を追加する必要があります。これは使うときに私に案内してください。
+
+完了したら動作テスト方法を教えてください。</pre>
+  </div>
+</div>
+
+<div class="note note-info">
+  💡 <strong>スキルとは？</strong><br>
+  <span style="color:var(--text-secondary);">
+    Claude Code に新しい能力を追加する仕組みです。一度作れば、以降は自然な言葉で指示するだけで使えます。<br>
+    例：「運用シートの今日のデータ見せて」→ Claude Code がスキルを使って自動でデータ取得
+  </span>
+</div>
+
+<div class="note note-warn">
+  ⚠️ <strong>スプレッドシートの共有設定</strong><br>
+  <span style="color:var(--text-secondary);">
+    アクセスしたいスプレッドシートの共有設定に以下のメールアドレスを追加してください：<br>
+    <code style="background:rgba(0,0,0,0.3); padding:2px 8px; border-radius:4px;">claude-sheets@axis-ai-tools.iam.gserviceaccount.com</code>
+  </span>
+</div>
+
+<hr class="divider">
+
 <!-- ========== WORK 1 ========== -->
-<h2>🔵 第1層：業務の棚卸し（13:00-14:00）</h2>
+<h2>🔵 第1層：業務の棚卸し（13:20-14:15）</h2>
 
 <p>Claude Codeが対話形式であなたの昨日の業務を引き出し、分析します。<br>
 以下のプロンプトをClaude Codeにコピー＆ペーストして送信してください。</p>
