@@ -1992,10 +1992,20 @@ ghコマンドがなければ先にインストールしてください。
             💡 AIが自動でダウンロードフォルダを見つけて処理します。場所を聞かれた場合はそのまま答えてください。
           </div>
 
-          <div style="margin-top:1.5rem; padding:1rem; background:var(--bg-secondary); border-radius:12px; border:1px solid var(--border-color);">
-            <h4 style="margin-bottom:0.5rem; font-size:0.95rem;">📄 上級者向け：CLAUDE.md フル版テンプレート</h4>
-            <p style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:0.5rem;">AIの動作をさらに細かく設定したい方はこちらを参考にしてください。</p>
-            <a href="CLAUDE-template.md" target="_blank" style="color:var(--accent-primary); text-decoration:none;">CLAUDE.md フル版テンプレートを見る →</a>
+          <div style="margin-top:1.5rem;">
+            <h4 style="margin-bottom:0.5rem; font-size:0.95rem;">⚡ CLAUDE.md を設定する</h4>
+            <p style="color:var(--text-secondary); font-size:0.85rem; margin-bottom:0.75rem;">Claude Code の動き方を決めるグローバル設定ファイルです。以下のプロンプトを送ってください。</p>
+            <div class="code-block">
+              <button class="copy-btn" onclick="copyCode(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> コピー</button>
+              <pre>以下のURLからCLAUDE.mdをダウンロードして、~/.claude/CLAUDE.md に保存してください。
+
+https://nishimura-axis.github.io/nishiyama001/setup/CLAUDE-global.md
+
+保存したら中身を表示してください。</pre>
+            </div>
+            <div style="margin-top:0.5rem; padding:0.75rem 1rem; background:rgba(99,102,241,0.1); border-radius:8px; font-size:0.9rem;">
+              💡 これを入れると、Claude Code が「推測せず聞く」「80%で出す」「ログを残す」といったルールで動くようになります。
+            </div>
           </div>
         </div>
 
