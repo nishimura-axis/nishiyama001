@@ -1,50 +1,22 @@
 {
-  "agent": "nishiyama001",
-  "updated": "2026-03-04T13:10:00+09:00",
-  "status": "working",
-  "currentTask": "6号（設計アシスタント）OpenClaw登録",
+  "currentTask": null,
   "tasks": [
-    {
-      "id": "task-002",
-      "title": "5号セットアップ",
-      "status": "done",
-      "completedAt": "2026-03-04T11:03:00+09:00"
-    },
-    {
-      "id": "task-006",
-      "title": "6号（設計アシスタント）設計",
-      "status": "in_progress",
-      "priority": 1,
-      "subtasks": [
-        { "name": "SOUL.md作成", "status": "done" },
-        { "name": "AGENTS.md作成", "status": "done" },
-        { "name": "OpenClaw登録", "status": "in_progress" },
-        { "name": "動作確認", "status": "todo" }
-      ]
-    },
-    {
-      "id": "task-003",
-      "title": "木口AI化設計書",
-      "status": "todo",
-      "priority": 2
-    },
-    {
-      "id": "task-004",
-      "title": "2号（AXAD専属）設計",
-      "status": "todo",
-      "priority": 3
-    },
-    {
-      "id": "task-005",
-      "title": "キャンペーン名エラー検知設計",
-      "status": "blocked",
-      "blockedBy": "にっしーから要件待ち"
-    },
-    {
-      "id": "task-007",
-      "title": "ダッシュボード改善（常時）",
-      "status": "in_progress",
-      "priority": 4
-    }
+    {"id": "task-001", "title": "AXAD Phase 2 要件定義", "status": "on_hold", "note": "にっしー指示でon_hold"},
+    {"id": "task-002", "title": "影分身設計（2号〜7号）", "status": "done"},
+    {"id": "task-003", "title": "木口AI化", "status": "done", "note": "3/11 PJクローズ"},
+    {"id": "task-004", "title": "2号セットアップ", "status": "done"},
+    {"id": "task-005", "title": "ダッシュボード構築・改善", "status": "done", "note": "常時改善タスク。task-017〜021完了"},
+    {"id": "task-006", "title": "稲葉さんAI講義", "status": "done", "note": "3/11 本番完了"},
+    {"id": "task-007", "title": "kiguchi-brain構築", "status": "done"},
+    {"id": "task-008", "title": "usukura-brain構築", "status": "done"},
+    {"id": "task-009", "title": "7号構築・チューニング", "status": "done"},
+    {"id": "task-010", "title": "4号転換（思考整理パートナー）", "status": "done", "note": "3/17完了"},
+    {"id": "task-011", "title": "報告フロー整理", "status": "done", "note": "3/16 窓口1号一本化"},
+    {"id": "task-012", "title": "エージェントセキュリティ強化", "status": "done", "note": "3/15 exec/process剥奪"},
+    {"id": "task-013", "title": "自動精査ページUI設計", "status": "in_progress", "note": "西森と一緒にUI詰め中"},
+    {"id": "task-014", "title": "アド管理役割分担周知CWテキスト", "status": "done", "note": "3/17 FIX"},
+    {"id": "task-015", "title": "ダッシュボードコスト表示修正", "status": "in_progress", "note": "sessions.jsonから月間累計取得に変更。3号対応中"},
+    {"id": "task-016", "title": "XAI_API_KEY設定", "status": "in_progress", "note": "plist追記済み、Gateway再起動で反映確認待ち"},
+    {"id": "task-017", "title": "にっしーのタスク全洗い出し", "status": "done", "note": "3/17 29件洗い出し完了"}
   ]
 }
