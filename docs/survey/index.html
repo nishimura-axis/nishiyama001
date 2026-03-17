@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AXAD 使用感アンケート</title>
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --card: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #e0e0e0;
+    --muted: #888;
+    --accent: #3b82f6;
+    --accent-hover: #2563eb;
+    --success: #22c55e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 24px 16px 80px;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  .header p {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .section h2 {
+    font-size: 1rem;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section .desc {
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-bottom: 16px;
+  }
+  .required {
+    color: #ef4444;
+    font-size: 0.75rem;
+    font-weight: normal;
+  }
+  label.radio-label, label.check-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-size: 0.95rem;
+  }
+  label.radio-label:hover, label.check-label:hover {
+    background: rgba(255,255,255,0.05);
+  }
+  input[type="radio"], input[type="checkbox"] {
+    accent-color: var(--accent);
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+  .stars {
+    display: flex;
+    gap: 4px;
+    margin: 8px 0;
+  }
+  .stars label {
+    cursor: pointer;
+    font-size: 2rem;
+    color: var(--border);
+    transition: color 0.15s;
+  }
+  .stars input { display: none; }
+  .stars label:hover, .stars label:hover ~ label { color: #facc15; }
+  .stars input:checked ~ label { color: var(--border); }
+  .stars:has(input:checked) label { color: #facc15; }
+  .stars input:checked ~ label { color: var(--border) !important; }
+  /* Reverse star order trick */
+  .stars { flex-direction: row-reverse; justify-content: flex-end; }
+  .stars label:hover ~ label { color: #facc15; }
+
+  textarea {
+    width: 100%;
+    min-height: 100px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    padding: 12px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    resize: vertical;
+  }
+  textarea:focus { outline: none; border-color: var(--accent); }
+  textarea::placeholder { color: #555; }
+
+  .name-input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    font-family: inherit;
+  }
+  .name-input:focus { outline: none; border-color: var(--accent); }
+
+  .submit-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+    margin-top: 24px;
+  }
+  .submit-btn:hover { background: var(--accent-hover); }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .rating-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 8px 0;
+  }
+  .rating-group label {
+    cursor: pointer;
+  }
+  .rating-group input { display: none; }
+  .rating-group span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.15s;
+  }
+  .rating-group input:checked + span {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+  .rating-group label:hover span {
+    border-color: var(--accent);
+  }
+  .rating-labels {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 0.75rem;
+    margin-top: 4px;
+  }
+
+  .done-screen {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+  }
+  .done-screen .check {
+    font-size: 3rem;
+    margin-bottom: 16px;
+  }
+  .done-screen h2 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
+  .done-screen p {
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<div class="container" id="form-container">
+  <div class="header">
+    <h1>📊 AXAD 使用感アンケート</h1>
+    <p>リリースから1ヶ月が経ちました。<br>日々の使用感を率直に教えてください（3分程度）</p>
+  </div>
+
+  <form id="survey-form">
+
+    <!-- 名前 -->
+    <div class="section">
+      <h2>👤 お名前 <span class="required">*必須</span></h2>
+      <div class="desc">回答は西村のみ確認します</div>
+      <input type="text" class="name-input" name="name" required placeholder="例：友利きらら">
+    </div>
+
+    <!-- Q1: 総合満足度 -->
+    <div class="section">
+      <h2>Q1. AXADの総合的な満足度 <span class="required">*必須</span></h2>
+      <div class="desc">スプレッドシート時代と比べて、今の業務のしやすさを評価してください</div>
+      <div class="rating-group">
+        <label><input type="radio" name="q1" value="1" required><span>1</span></label>
+        <label><input type="radio" name="q1" value="2"><span>2</span></label>
+        <label><input type="radio" name="q1" value="3"><span>3</span></label>
+        <label><input type="radio" name="q1" value="4"><span>4</span></label>
+        <label><input type="radio" name="q1" value="5"><span>5</span></label>
+      </div>
+      <div class="rating-labels"><span>不満</span><span>満足</span></div>
+    </div>
+
+    <!-- Q2: よく使う機能 -->
+    <div class="section">
+      <h2>Q2. よく使う機能はどれ？ <span class="required">*必須</span></h2>
+      <div class="desc">日常的に使っている機能を全て選んでください</div>
+      <label class="check-label"><input type="checkbox" name="q2" value="精査">精査（ルールベースの自動チェック）</label>
+      <label class="check-label"><input type="checkbox" name="q2" value="CP一覧">キャンペーン一覧・操作</label>
+      <label class="check-label"><input type="checkbox" name="q2" value="分析">分析ページ（全体/個人/日別）</label>
+      <label class="check-label"><input type="checkbox" name="q2" value="マイページ">マイページ</label>
+      <label class="check-label"><input type="checkbox" name="q2" value="自動運用">自動運用（ON/OFF・予算変更・0時ON）</label>
+      <label class="check-label"><input type="checkbox" name="q2" value="通知">Chatwork通知</label>
+      <label class="check-label"><input type="checkbox" name="q2" value="スマホ">スマホから確認</label>
+    </div>
+
+    <!-- Q3: 表示速度 -->
+    <div class="section">
+      <h2>Q3. 表示速度はどう？ <span class="required">*必須</span></h2>
+      <div class="desc">ページの読み込みやデータ表示の速さ</div>
+      <label class="radio-label"><input type="radio" name="q3" value="速い" required>速い（ストレスなし）</label>
+      <label class="radio-label"><input type="radio" name="q3" value="普通">普通（気にならない）</label>
+      <label class="radio-label"><input type="radio" name="q3" value="遅い">遅いと感じることがある</label>
+      <label class="radio-label"><input type="radio" name="q3" value="かなり遅い">かなり遅い（業務に支障）</label>
+    </div>
+
+    <!-- Q4: スプレッドシートまだ使ってる？ -->
+    <div class="section">
+      <h2>Q4. まだスプレッドシートを使ってる？ <span class="required">*必須</span></h2>
+      <div class="desc">AXADに移行できず、まだスプシに頼っている業務があれば教えてください</div>
+      <label class="radio-label"><input type="radio" name="q4" value="完全移行" required>完全にAXADに移行できた</label>
+      <label class="radio-label"><input type="radio" name="q4" value="ほぼ移行">ほぼ移行できた（たまにスプシを見る程度）</label>
+      <label class="radio-label"><input type="radio" name="q4" value="併用">まだ併用している</label>
+      <label class="radio-label"><input type="radio" name="q4" value="スプシ中心">正直スプシの方が多い</label>
+    </div>
+
+    <!-- Q4-sub: まだ使ってる場合 -->
+    <div class="section">
+      <h2>Q4-2. スプシを使う理由（該当する人のみ）</h2>
+      <div class="desc">AXADでできない・やりづらいことがあれば具体的に</div>
+      <textarea name="q4sub" placeholder="例：突き合わせの確認がまだスプシの方が慣れてる、など"></textarea>
+    </div>
+
+    <!-- Q5: 困っていること -->
+    <div class="section">
+      <h2>Q5. 困っていること・使いづらい点 <span class="required">*必須</span></h2>
+      <div class="desc">日々使っていて「ここ直してほしい」「こうだったらいいのに」を自由に</div>
+      <textarea name="q5" required placeholder="例：精査のルールを自分で変えたい、CP名が長いと見切れる、など"></textarea>
+    </div>
+
+    <!-- Q6: あったら嬉しい機能 -->
+    <div class="section">
+      <h2>Q6. あったら嬉しい機能</h2>
+      <div class="desc">なくてもOK。思いつくものがあれば</div>
+      <textarea name="q6" placeholder="例：案件ごとの利益推移グラフ、スマホで精査完了操作、など"></textarea>
+    </div>
+
+    <!-- Q7: 自由記述 -->
+    <div class="section">
+      <h2>Q7. その他、何でも</h2>
+      <div class="desc">良かった点、不満、要望、なんでもOK</div>
+      <textarea name="q7" placeholder="自由に書いてください"></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn" id="submit-btn">回答を送信</button>
+  </form>
+</div>
+
+<div class="done-screen" id="done-screen">
+  <div class="check">✅</div>
+  <h2>ありがとうございました！</h2>
+  <p>回答を受け付けました。<br>フィードバックをもとに改善していきます。</p>
+</div>
+
+<script>
+document.getElementById('survey-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = '送信中...';
+
+  const fd = new FormData(this);
+  const data = {};
+  for (const [key, val] of fd.entries()) {
+    if (data[key]) {
+      if (Array.isArray(data[key])) data[key].push(val);
+      else data[key] = [data[key], val];
+    } else {
+      data[key] = val;
+    }
+  }
+  data.timestamp = new Date().toISOString();
+
+  // Webhook送信（Mac miniのwebhook-receiverに送る）
+  try {
+    await fetch('https://webhook.nishiyama001.workers.dev/survey', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+  } catch(err) {
+    // webhook失敗してもOK、ローカルストレージにも保存
+    console.log('Webhook failed, saving locally', err);
+  }
+
+  // ローカルストレージにもバックアップ
+  const saved = JSON.parse(localStorage.getItem('axad-survey') || '[]');
+  saved.push(data);
+  localStorage.setItem('axad-survey', JSON.stringify(saved));
+
+  document.getElementById('form-container').style.display = 'none';
+  document.getElementById('done-screen').style.display = 'block';
+});
+</script>
+
+</body>
+</html>
