@@ -62,6 +62,35 @@
       <h1>📊 AXADアンケート</h1>
       <p class="subtitle">リリース1ヶ月ヒアリング（運用者向け）・回答時間 約3分</p>
 
+      <!-- 回答者 -->
+      <div class="section">
+        <h2>お名前 <span class="required">*必須</span></h2>
+        <select name="respondent" id="respondent" style="width:100%;padding:0.75rem;background:#0f172a;border:1px solid #334155;border-radius:8px;color:#e2e8f0;font-size:0.9rem;appearance:none;cursor:pointer;">
+          <option value="">選択してください</option>
+          <option value="安部勇之介">安部勇之介</option>
+          <option value="内海翔太">内海翔太</option>
+          <option value="大野健太">大野健太</option>
+          <option value="加藤萌々">加藤萌々</option>
+          <option value="工内優雅">工内優雅</option>
+          <option value="小林">小林</option>
+          <option value="小堂陽人">小堂陽人</option>
+          <option value="古木海翔">古木海翔</option>
+          <option value="鹿島圭市">鹿島圭市</option>
+          <option value="菅野太一">菅野太一</option>
+          <option value="田中隆之介">田中隆之介</option>
+          <option value="田村遥奈">田村遥奈</option>
+          <option value="中田悠太">中田悠太</option>
+          <option value="二関颯太">二関颯太</option>
+          <option value="白井和希">白井和希</option>
+          <option value="穂積正弥">穂積正弥</option>
+          <option value="松﨑陽紀">松﨑陽紀</option>
+          <option value="萬木真人">萬木真人</option>
+          <option value="横山龍">横山龍</option>
+          <option value="米沢祐輝">米沢祐輝</option>
+          <option value="岩﨑麻衣花">岩﨑麻衣花</option>
+        </select>
+      </div>
+
       <!-- Q1 -->
       <div class="section">
         <h2>Q1. よく使うページは？ <span class="required">*必須</span></h2>
@@ -171,6 +200,8 @@
 
     // Submit
     async function submitForm() {
+      const respondent = document.getElementById('respondent').value;
+      if (!respondent) { alert('お名前を選択してください'); return; }
       const q1 = [...document.querySelectorAll('input[name="q1"]:checked')].map(c => c.value);
       if (q1.length === 0) { alert('Q1を選択してください'); return; }
       const q2 = document.querySelector('input[name="q2"]:checked');
@@ -185,6 +216,7 @@
       });
 
       const data = {
+        respondent: respondent,
         q1_pages: q1,
         q1_comments: q1Comments,
         q2_spreadsheet: q2.value,

@@ -40,6 +40,7 @@
     <p class="subtitle">リアルタイム集計</p>
     <button class="refresh-btn" onclick="loadData()">🔄 更新</button>
     <div class="stats"><div class="stat-card"><div class="num" id="cnt">-</div><div class="label">回答数</div></div><div class="stat-card"><div class="num" id="ss">-</div><div class="label">スプシ依存あり</div></div></div>
+    <div class="section"><h2>回答者</h2><div id="respondents" style="font-size:0.9rem;color:#94a3b8;"></div></div>
     <div class="section"><h2>Q1. よく使うページ</h2><div id="q1c"></div><div id="q1cm" style="margin-top:1rem"></div></div>
     <div class="section"><h2>Q2. スプレッドシート依存</h2><div id="q2r"></div></div>
     <div class="section"><h2>Q3. 自動化してほしいこと</h2><div id="q3r"></div></div>
@@ -55,6 +56,8 @@
     function render(R) {
       const n = R.length;
       document.getElementById("cnt").textContent = n;
+      const names = R.map(r => r.respondent).filter(Boolean);
+      document.getElementById("respondents").innerHTML = names.length ? names.join("、") : '<span class="empty">まだ回答なし</span>';
       if (!n) { document.getElementById("ss").textContent = "-"; return; }
       const pc = {}, cm = [];
       R.forEach((r,i) => {
