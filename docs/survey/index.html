@@ -171,7 +171,7 @@
     });
 
     // Submit
-    function submitForm() {
+    async function submitForm() {
       const q1 = [...document.querySelectorAll('input[name="q1"]:checked')].map(c => c.value);
       if (q1.length === 0) { alert('Q1を選択してください'); return; }
       const q2 = document.querySelector('input[name="q2"]:checked');
@@ -196,10 +196,10 @@
         timestamp: new Date().toISOString()
       };
 
-      console.log('Survey Response:', JSON.stringify(data, null, 2));
-      const responses = JSON.parse(localStorage.getItem('axad-survey') || '[]');
-      responses.push(data);
-      localStorage.setItem('axad-survey', JSON.stringify(responses));
+      // Send to server
+      
+      
+      
 
       document.getElementById('form-area').style.display = 'none';
       document.getElementById('thanks-area').style.display = 'block';
