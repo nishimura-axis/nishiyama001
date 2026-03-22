@@ -15,50 +15,42 @@
     .section .desc { color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem; }
     .required { color: #f87171; font-size: 0.8rem; margin-left: 0.5rem; }
 
-    /* Checkbox grid */
-    .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
-    @media (max-width: 480px) { .check-grid { grid-template-columns: 1fr; } }
-    label.check-label { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.8rem; background: #0f172a; border-radius: 8px; cursor: pointer; font-size: 0.9rem; border: 1px solid #334155; transition: all 0.2s; }
+    label.check-label { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.8rem; background: #0f172a; border-radius: 8px; cursor: pointer; font-size: 0.9rem; border: 1px solid #334155; transition: all 0.2s; margin-bottom: 0.5rem; }
     label.check-label:hover { border-color: #38bdf8; }
-    label.check-label input:checked + span { color: #38bdf8; }
     label.check-label:has(input:checked) { border-color: #38bdf8; background: rgba(56,189,248,0.1); }
+    label.check-label input:checked + span { color: #38bdf8; }
 
-    /* Radio */
+    .page-comment { display: none; margin: 0 0 0.5rem 0; }
+    .page-comment.show { display: block; }
+    .page-comment textarea { width: 100%; min-height: 40px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #e2e8f0; padding: 0.5rem 0.75rem; font-size: 0.85rem; resize: vertical; font-family: inherit; }
+    .page-comment textarea:focus { outline: none; border-color: #38bdf8; }
+    .page-comment textarea::placeholder { color: #64748b; }
+
     .radio-group { display: flex; gap: 1rem; }
     label.radio-label { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1rem; background: #0f172a; border-radius: 8px; cursor: pointer; font-size: 0.9rem; border: 1px solid #334155; transition: all 0.2s; }
     label.radio-label:hover { border-color: #38bdf8; }
     label.radio-label:has(input:checked) { border-color: #38bdf8; background: rgba(56,189,248,0.1); }
 
-    /* Conditional textarea */
     .conditional { display: none; margin-top: 0.75rem; }
     .conditional.show { display: block; }
 
-    /* Textarea */
     textarea { width: 100%; min-height: 80px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #e2e8f0; padding: 0.75rem; font-size: 0.9rem; resize: vertical; font-family: inherit; }
     textarea:focus { outline: none; border-color: #38bdf8; }
     textarea::placeholder { color: #64748b; }
 
-    /* TOP3 ranking */
     .ranking-list { display: flex; flex-direction: column; gap: 0.5rem; }
-    .ranking-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; background: #0f172a; border-radius: 8px; border: 1px solid #334155; cursor: grab; user-select: none; transition: all 0.2s; }
-    .ranking-item:active { cursor: grabbing; }
+    .ranking-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; background: #0f172a; border-radius: 8px; border: 1px solid #334155; cursor: pointer; user-select: none; transition: all 0.2s; }
+    .ranking-item:hover { border-color: #475569; }
     .ranking-item .rank { font-weight: bold; color: #64748b; min-width: 2rem; }
     .ranking-item .rank.active { color: #38bdf8; }
     .ranking-item.selected { border-color: #38bdf8; background: rgba(56,189,248,0.1); }
     .ranking-item .name { flex: 1; font-size: 0.9rem; }
-    .rank-btn { padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid #475569; background: #1e293b; color: #94a3b8; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; }
-    .rank-btn:hover { border-color: #38bdf8; color: #38bdf8; }
-    .rank-btn.chosen { background: #38bdf8; color: #0f172a; border-color: #38bdf8; }
-    .ranking-controls { display: flex; gap: 0.3rem; }
     .ranking-summary { margin-top: 0.75rem; padding: 0.75rem; background: #0f172a; border-radius: 8px; border: 1px solid #334155; font-size: 0.85rem; color: #94a3b8; }
     .ranking-summary .chosen-item { color: #38bdf8; }
 
-    /* Submit */
     .submit-btn { display: block; width: 100%; padding: 1rem; background: #38bdf8; color: #0f172a; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.2s; }
     .submit-btn:hover { background: #7dd3fc; }
-    .submit-btn:disabled { background: #475569; cursor: not-allowed; }
 
-    /* Thanks */
     .thanks { display: none; text-align: center; padding: 3rem 1rem; }
     .thanks h2 { font-size: 1.5rem; color: #38bdf8; margin-bottom: 1rem; }
     .thanks p { color: #94a3b8; }
@@ -73,27 +65,8 @@
       <!-- Q1 -->
       <div class="section">
         <h2>Q1. よく使うページは？ <span class="required">*必須</span></h2>
-        <div class="desc">当てはまるものを全て選んでください</div>
-        <div class="check-grid" id="q1-grid">
-          <label class="check-label"><input type="checkbox" name="q1" value="ダッシュボード（トップ）"><span>ダッシュボード（トップ）</span></label>
-          <label class="check-label"><input type="checkbox" name="q1" value="運用管理"><span>運用管理</span></label>
-          <label class="check-label"><input type="checkbox" name="q1" value="精査ログ"><span>精査ログ</span></label>
-          <label class="check-label"><input type="checkbox" name="q1" value="精査ルール"><span>精査ルール</span></label>
-          <label class="check-label"><input type="checkbox" name="q1" value="データ編集"><span>データ編集</span></label>
-          <label class="check-label"><input type="checkbox" name="q1" value="アカウント管理"><span>アカウント管理</span></label>
-          <label class="check-label"><input type="checkbox" name="q1" value="全体分析"><span>全体分析</span></label>
-          <label class="check-label"><input type="checkbox" name="q1" value="案件別分析"><span>案件別分析</span></label>
-          <label class="check-label"><input type="checkbox" name="q1" value="個人分析"><span>個人分析</span></label>
-          <label class="check-label"><input type="checkbox" name="q1" value="月次分析"><span>月次分析</span></label>
-          <label class="check-label"><input type="checkbox" name="q1" value="週次分析"><span>週次分析</span></label>
-          <label class="check-label"><input type="checkbox" name="q1" value="ボトルネック分析"><span>ボトルネック分析</span></label>
-          <label class="check-label"><input type="checkbox" name="q1" value="記事分析"><span>記事分析</span></label>
-          <label class="check-label"><input type="checkbox" name="q1" value="CP検索"><span>CP検索</span></label>
-          <label class="check-label"><input type="checkbox" name="q1" value="キーワード検索"><span>キーワード検索</span></label>
-          <label class="check-label"><input type="checkbox" name="q1" value="マイページ"><span>マイページ</span></label>
-          <label class="check-label"><input type="checkbox" name="q1" value="同期管理"><span>同期管理</span></label>
-          <label class="check-label"><input type="checkbox" name="q1" value="ヘルプ"><span>ヘルプ</span></label>
-        </div>
+        <div class="desc">当てはまるものを全て選んでください。選んだページに意見があればコメントも書けます。</div>
+        <div id="q1-list"></div>
       </div>
 
       <!-- Q2 -->
@@ -117,36 +90,16 @@
       <!-- Q4 -->
       <div class="section">
         <h2>Q4. 以下はAXADの今後の開発予定です。特に欲しい機能をTOP3で選んでください。 <span class="required">*必須</span></h2>
-        <div class="desc">1位→2位→3位の順にクリックしてください。選び直す場合はもう一度クリックで解除できます。</div>
+        <div class="desc">1位→2位→3位の順にクリック。もう一度クリックで解除できます。</div>
         <div class="ranking-list" id="q4-list">
-          <div class="ranking-item" data-value="AXADから直接出稿（Meta/TikTok）">
-            <span class="rank">-</span>
-            <span class="name">AXADから直接出稿（Meta/TikTok）</span>
-          </div>
-          <div class="ranking-item" data-value="クリエイティブ別の成果分析">
-            <span class="rank">-</span>
-            <span class="name">クリエイティブ別の成果分析</span>
-          </div>
-          <div class="ranking-item" data-value="命名規則シートのAXAD移行">
-            <span class="rank">-</span>
-            <span class="name">命名規則シートのAXAD移行</span>
-          </div>
-          <div class="ranking-item" data-value="日次レポートの自動生成">
-            <span class="rank">-</span>
-            <span class="name">日次レポートの自動生成</span>
-          </div>
-          <div class="ranking-item" data-value="週次まとめの自動化">
-            <span class="rank">-</span>
-            <span class="name">週次まとめの自動化</span>
-          </div>
-          <div class="ranking-item" data-value="精査ルールを自分で編集">
-            <span class="rank">-</span>
-            <span class="name">精査ルールを自分で編集</span>
-          </div>
+          <div class="ranking-item" data-value="AXADから直接出稿（Meta/TikTok）"><span class="rank">-</span><span class="name">AXADから直接出稿（Meta/TikTok）</span></div>
+          <div class="ranking-item" data-value="クリエイティブ別の成果分析"><span class="rank">-</span><span class="name">クリエイティブ別の成果分析</span></div>
+          <div class="ranking-item" data-value="命名規則シートのAXAD移行"><span class="rank">-</span><span class="name">命名規則シートのAXAD移行</span></div>
+          <div class="ranking-item" data-value="日次レポートの自動生成"><span class="rank">-</span><span class="name">日次レポートの自動生成</span></div>
+          <div class="ranking-item" data-value="週次まとめの自動化"><span class="rank">-</span><span class="name">週次まとめの自動化</span></div>
+          <div class="ranking-item" data-value="精査ルールを自分で編集"><span class="rank">-</span><span class="name">精査ルールを自分で編集</span></div>
         </div>
-        <div class="ranking-summary" id="q4-summary">
-          まだ選択されていません
-        </div>
+        <div class="ranking-summary" id="q4-summary">まだ選択されていません</div>
       </div>
 
       <!-- Q5 -->
@@ -155,7 +108,7 @@
         <textarea name="q5" placeholder="自由に記入してください"></textarea>
       </div>
 
-      <button class="submit-btn" id="submit-btn" onclick="submitForm()">回答を送信</button>
+      <button class="submit-btn" onclick="submitForm()">回答を送信</button>
     </div>
 
     <div class="thanks" id="thanks-area">
@@ -165,6 +118,28 @@
   </div>
 
   <script>
+    // Q1 pages with comment
+    const pages = [
+      'ダッシュボード（トップ）','運用管理','精査ログ','精査ルール','データ編集',
+      'アカウント管理','全体分析','案件別分析','個人分析','月次分析',
+      '週次分析','ボトルネック分析','記事分析','CP検索','キーワード検索',
+      'マイページ','同期管理','ヘルプ'
+    ];
+    const q1List = document.getElementById('q1-list');
+    pages.forEach((p, i) => {
+      const id = 'q1_' + i;
+      q1List.innerHTML += `
+        <label class="check-label" for="${id}"><input type="checkbox" name="q1" value="${p}" id="${id}" onchange="toggleComment(${i})"><span>${p}</span></label>
+        <div class="page-comment" id="comment-${i}"><textarea name="q1_comment_${i}" placeholder="このページについて意見があれば"></textarea></div>
+      `;
+    });
+
+    function toggleComment(i) {
+      const cb = document.getElementById('q1_' + i);
+      const comment = document.getElementById('comment-' + i);
+      comment.classList.toggle('show', cb.checked);
+    }
+
     // Q2 conditional
     document.querySelectorAll('input[name="q2"]').forEach(r => {
       r.addEventListener('change', () => {
@@ -172,65 +147,47 @@
       });
     });
 
-    // Q4 TOP3 ranking
+    // Q4 TOP3
     const rankLabels = ['1位', '2位', '3位'];
     let selected = [];
-
     document.querySelectorAll('#q4-list .ranking-item').forEach(item => {
       item.addEventListener('click', () => {
         const val = item.dataset.value;
         const idx = selected.indexOf(val);
+        if (idx >= 0) { selected.splice(idx, 1); }
+        else if (selected.length < 3) { selected.push(val); }
 
-        if (idx >= 0) {
-          // Deselect
-          selected.splice(idx, 1);
-        } else if (selected.length < 3) {
-          // Select
-          selected.push(val);
-        }
-
-        // Update UI
         document.querySelectorAll('#q4-list .ranking-item').forEach(el => {
           const i = selected.indexOf(el.dataset.value);
           const rankEl = el.querySelector('.rank');
-          if (i >= 0) {
-            el.classList.add('selected');
-            rankEl.textContent = rankLabels[i];
-            rankEl.classList.add('active');
-          } else {
-            el.classList.remove('selected');
-            rankEl.textContent = '-';
-            rankEl.classList.remove('active');
-          }
+          if (i >= 0) { el.classList.add('selected'); rankEl.textContent = rankLabels[i]; rankEl.classList.add('active'); }
+          else { el.classList.remove('selected'); rankEl.textContent = '-'; rankEl.classList.remove('active'); }
         });
 
-        // Update summary
         const summary = document.getElementById('q4-summary');
-        if (selected.length === 0) {
-          summary.innerHTML = 'まだ選択されていません';
-        } else {
-          summary.innerHTML = selected.map((v, i) =>
-            `<span class="chosen-item">${rankLabels[i]}: ${v}</span>`
-          ).join('<br>');
-        }
+        summary.innerHTML = selected.length === 0 ? 'まだ選択されていません' :
+          selected.map((v, i) => `<span class="chosen-item">${rankLabels[i]}: ${v}</span>`).join('<br>');
       });
     });
 
     // Submit
     function submitForm() {
-      // Validate Q1
       const q1 = [...document.querySelectorAll('input[name="q1"]:checked')].map(c => c.value);
       if (q1.length === 0) { alert('Q1を選択してください'); return; }
-
-      // Validate Q2
       const q2 = document.querySelector('input[name="q2"]:checked');
       if (!q2) { alert('Q2を選択してください'); return; }
-
-      // Validate Q4
       if (selected.length < 3) { alert('Q4でTOP3を選んでください'); return; }
+
+      const q1Comments = {};
+      q1.forEach((p, _) => {
+        const idx = pages.indexOf(p);
+        const textarea = document.querySelector(`textarea[name="q1_comment_${idx}"]`);
+        if (textarea && textarea.value.trim()) { q1Comments[p] = textarea.value.trim(); }
+      });
 
       const data = {
         q1_pages: q1,
+        q1_comments: q1Comments,
         q2_spreadsheet: q2.value,
         q2_detail: document.querySelector('textarea[name="q2_detail"]')?.value || '',
         q3_automation: document.querySelector('textarea[name="q3"]')?.value || '',
@@ -240,9 +197,6 @@
       };
 
       console.log('Survey Response:', JSON.stringify(data, null, 2));
-
-      // TODO: Send to backend
-      // For now, store in localStorage
       const responses = JSON.parse(localStorage.getItem('axad-survey') || '[]');
       responses.push(data);
       localStorage.setItem('axad-survey', JSON.stringify(responses));
