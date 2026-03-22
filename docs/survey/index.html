@@ -1,352 +1,255 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AXAD 使用感アンケート</title>
-<style>
-  :root {
-    --bg: #0f0f0f;
-    --card: #1a1a1a;
-    --border: #2a2a2a;
-    --text: #e0e0e0;
-    --muted: #888;
-    --accent: #3b82f6;
-    --accent-hover: #2563eb;
-    --success: #22c55e;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-  .container {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 24px 16px 80px;
-  }
-  .header {
-    text-align: center;
-    margin-bottom: 32px;
-    padding: 24px 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .header h1 {
-    font-size: 1.5rem;
-    margin-bottom: 8px;
-  }
-  .header p {
-    color: var(--muted);
-    font-size: 0.9rem;
-  }
-  .section {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 16px;
-  }
-  .section h2 {
-    font-size: 1rem;
-    margin-bottom: 4px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .section .desc {
-    color: var(--muted);
-    font-size: 0.8rem;
-    margin-bottom: 16px;
-  }
-  .required {
-    color: #ef4444;
-    font-size: 0.75rem;
-    font-weight: normal;
-  }
-  label.radio-label, label.check-label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.15s;
-    font-size: 0.95rem;
-  }
-  label.radio-label:hover, label.check-label:hover {
-    background: rgba(255,255,255,0.05);
-  }
-  input[type="radio"], input[type="checkbox"] {
-    accent-color: var(--accent);
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-  }
-  .stars {
-    display: flex;
-    gap: 4px;
-    margin: 8px 0;
-  }
-  .stars label {
-    cursor: pointer;
-    font-size: 2rem;
-    color: var(--border);
-    transition: color 0.15s;
-  }
-  .stars input { display: none; }
-  .stars label:hover, .stars label:hover ~ label { color: #facc15; }
-  .stars input:checked ~ label { color: var(--border); }
-  .stars:has(input:checked) label { color: #facc15; }
-  .stars input:checked ~ label { color: var(--border) !important; }
-  /* Reverse star order trick */
-  .stars { flex-direction: row-reverse; justify-content: flex-end; }
-  .stars label:hover ~ label { color: #facc15; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AXADアンケート</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; padding: 2rem 1rem; }
+    .container { max-width: 640px; margin: 0 auto; }
+    h1 { font-size: 1.5rem; margin-bottom: 0.5rem; color: #38bdf8; }
+    .subtitle { color: #94a3b8; margin-bottom: 2rem; font-size: 0.9rem; }
+    .section { background: #1e293b; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid #334155; }
+    .section h2 { font-size: 1.1rem; margin-bottom: 0.75rem; color: #f1f5f9; }
+    .section .desc { color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem; }
+    .required { color: #f87171; font-size: 0.8rem; margin-left: 0.5rem; }
 
-  textarea {
-    width: 100%;
-    min-height: 100px;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    padding: 12px;
-    font-size: 0.95rem;
-    font-family: inherit;
-    resize: vertical;
-  }
-  textarea:focus { outline: none; border-color: var(--accent); }
-  textarea::placeholder { color: #555; }
+    /* Checkbox grid */
+    .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    @media (max-width: 480px) { .check-grid { grid-template-columns: 1fr; } }
+    label.check-label { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.8rem; background: #0f172a; border-radius: 8px; cursor: pointer; font-size: 0.9rem; border: 1px solid #334155; transition: all 0.2s; }
+    label.check-label:hover { border-color: #38bdf8; }
+    label.check-label input:checked + span { color: #38bdf8; }
+    label.check-label:has(input:checked) { border-color: #38bdf8; background: rgba(56,189,248,0.1); }
 
-  .name-input {
-    width: 100%;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    padding: 10px 12px;
-    font-size: 0.95rem;
-    font-family: inherit;
-  }
-  .name-input:focus { outline: none; border-color: var(--accent); }
+    /* Radio */
+    .radio-group { display: flex; gap: 1rem; }
+    label.radio-label { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1rem; background: #0f172a; border-radius: 8px; cursor: pointer; font-size: 0.9rem; border: 1px solid #334155; transition: all 0.2s; }
+    label.radio-label:hover { border-color: #38bdf8; }
+    label.radio-label:has(input:checked) { border-color: #38bdf8; background: rgba(56,189,248,0.1); }
 
-  .submit-btn {
-    display: block;
-    width: 100%;
-    padding: 14px;
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s;
-    margin-top: 24px;
-  }
-  .submit-btn:hover { background: var(--accent-hover); }
-  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    /* Conditional textarea */
+    .conditional { display: none; margin-top: 0.75rem; }
+    .conditional.show { display: block; }
 
-  .rating-group {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin: 8px 0;
-  }
-  .rating-group label {
-    cursor: pointer;
-  }
-  .rating-group input { display: none; }
-  .rating-group span {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    font-size: 1rem;
-    font-weight: 600;
-    transition: all 0.15s;
-  }
-  .rating-group input:checked + span {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: white;
-  }
-  .rating-group label:hover span {
-    border-color: var(--accent);
-  }
-  .rating-labels {
-    display: flex;
-    justify-content: space-between;
-    color: var(--muted);
-    font-size: 0.75rem;
-    margin-top: 4px;
-  }
+    /* Textarea */
+    textarea { width: 100%; min-height: 80px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #e2e8f0; padding: 0.75rem; font-size: 0.9rem; resize: vertical; font-family: inherit; }
+    textarea:focus { outline: none; border-color: #38bdf8; }
+    textarea::placeholder { color: #64748b; }
 
-  .done-screen {
-    display: none;
-    text-align: center;
-    padding: 60px 20px;
-  }
-  .done-screen .check {
-    font-size: 3rem;
-    margin-bottom: 16px;
-  }
-  .done-screen h2 {
-    font-size: 1.3rem;
-    margin-bottom: 8px;
-  }
-  .done-screen p {
-    color: var(--muted);
-  }
-</style>
+    /* TOP3 ranking */
+    .ranking-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .ranking-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; background: #0f172a; border-radius: 8px; border: 1px solid #334155; cursor: grab; user-select: none; transition: all 0.2s; }
+    .ranking-item:active { cursor: grabbing; }
+    .ranking-item .rank { font-weight: bold; color: #64748b; min-width: 2rem; }
+    .ranking-item .rank.active { color: #38bdf8; }
+    .ranking-item.selected { border-color: #38bdf8; background: rgba(56,189,248,0.1); }
+    .ranking-item .name { flex: 1; font-size: 0.9rem; }
+    .rank-btn { padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid #475569; background: #1e293b; color: #94a3b8; cursor: pointer; font-size: 0.8rem; transition: all 0.2s; }
+    .rank-btn:hover { border-color: #38bdf8; color: #38bdf8; }
+    .rank-btn.chosen { background: #38bdf8; color: #0f172a; border-color: #38bdf8; }
+    .ranking-controls { display: flex; gap: 0.3rem; }
+    .ranking-summary { margin-top: 0.75rem; padding: 0.75rem; background: #0f172a; border-radius: 8px; border: 1px solid #334155; font-size: 0.85rem; color: #94a3b8; }
+    .ranking-summary .chosen-item { color: #38bdf8; }
+
+    /* Submit */
+    .submit-btn { display: block; width: 100%; padding: 1rem; background: #38bdf8; color: #0f172a; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.2s; }
+    .submit-btn:hover { background: #7dd3fc; }
+    .submit-btn:disabled { background: #475569; cursor: not-allowed; }
+
+    /* Thanks */
+    .thanks { display: none; text-align: center; padding: 3rem 1rem; }
+    .thanks h2 { font-size: 1.5rem; color: #38bdf8; margin-bottom: 1rem; }
+    .thanks p { color: #94a3b8; }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <div id="form-area">
+      <h1>📊 AXADアンケート</h1>
+      <p class="subtitle">リリース1ヶ月ヒアリング（運用者向け）・回答時間 約3分</p>
 
-<div class="container" id="form-container">
-  <div class="header">
-    <h1>📊 AXAD 使用感アンケート</h1>
-    <p>リリースから1ヶ月が経ちました。<br>日々の使用感を率直に教えてください（3分程度）</p>
+      <!-- Q1 -->
+      <div class="section">
+        <h2>Q1. よく使うページは？ <span class="required">*必須</span></h2>
+        <div class="desc">当てはまるものを全て選んでください</div>
+        <div class="check-grid" id="q1-grid">
+          <label class="check-label"><input type="checkbox" name="q1" value="ダッシュボード（トップ）"><span>ダッシュボード（トップ）</span></label>
+          <label class="check-label"><input type="checkbox" name="q1" value="運用管理"><span>運用管理</span></label>
+          <label class="check-label"><input type="checkbox" name="q1" value="精査ログ"><span>精査ログ</span></label>
+          <label class="check-label"><input type="checkbox" name="q1" value="精査ルール"><span>精査ルール</span></label>
+          <label class="check-label"><input type="checkbox" name="q1" value="データ編集"><span>データ編集</span></label>
+          <label class="check-label"><input type="checkbox" name="q1" value="アカウント管理"><span>アカウント管理</span></label>
+          <label class="check-label"><input type="checkbox" name="q1" value="全体分析"><span>全体分析</span></label>
+          <label class="check-label"><input type="checkbox" name="q1" value="案件別分析"><span>案件別分析</span></label>
+          <label class="check-label"><input type="checkbox" name="q1" value="個人分析"><span>個人分析</span></label>
+          <label class="check-label"><input type="checkbox" name="q1" value="月次分析"><span>月次分析</span></label>
+          <label class="check-label"><input type="checkbox" name="q1" value="週次分析"><span>週次分析</span></label>
+          <label class="check-label"><input type="checkbox" name="q1" value="ボトルネック分析"><span>ボトルネック分析</span></label>
+          <label class="check-label"><input type="checkbox" name="q1" value="記事分析"><span>記事分析</span></label>
+          <label class="check-label"><input type="checkbox" name="q1" value="CP検索"><span>CP検索</span></label>
+          <label class="check-label"><input type="checkbox" name="q1" value="キーワード検索"><span>キーワード検索</span></label>
+          <label class="check-label"><input type="checkbox" name="q1" value="マイページ"><span>マイページ</span></label>
+          <label class="check-label"><input type="checkbox" name="q1" value="同期管理"><span>同期管理</span></label>
+          <label class="check-label"><input type="checkbox" name="q1" value="ヘルプ"><span>ヘルプ</span></label>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="section">
+        <h2>Q2. まだスプレッドシートでしか確認できないデータはありますか？ <span class="required">*必須</span></h2>
+        <div class="radio-group">
+          <label class="radio-label"><input type="radio" name="q2" value="ある" required><span>ある</span></label>
+          <label class="radio-label"><input type="radio" name="q2" value="ない"><span>ない</span></label>
+        </div>
+        <div class="conditional" id="q2-detail">
+          <textarea name="q2_detail" placeholder="具体的に教えてください"></textarea>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="section">
+        <h2>Q3. 日々の業務で「これが自動化されたら助かる」と思うことは？</h2>
+        <textarea name="q3" placeholder="自由に記入してください"></textarea>
+      </div>
+
+      <!-- Q4 -->
+      <div class="section">
+        <h2>Q4. 以下はAXADの今後の開発予定です。特に欲しい機能をTOP3で選んでください。 <span class="required">*必須</span></h2>
+        <div class="desc">1位→2位→3位の順にクリックしてください。選び直す場合はもう一度クリックで解除できます。</div>
+        <div class="ranking-list" id="q4-list">
+          <div class="ranking-item" data-value="AXADから直接出稿（Meta/TikTok）">
+            <span class="rank">-</span>
+            <span class="name">AXADから直接出稿（Meta/TikTok）</span>
+          </div>
+          <div class="ranking-item" data-value="クリエイティブ別の成果分析">
+            <span class="rank">-</span>
+            <span class="name">クリエイティブ別の成果分析</span>
+          </div>
+          <div class="ranking-item" data-value="命名規則シートのAXAD移行">
+            <span class="rank">-</span>
+            <span class="name">命名規則シートのAXAD移行</span>
+          </div>
+          <div class="ranking-item" data-value="日次レポートの自動生成">
+            <span class="rank">-</span>
+            <span class="name">日次レポートの自動生成</span>
+          </div>
+          <div class="ranking-item" data-value="週次まとめの自動化">
+            <span class="rank">-</span>
+            <span class="name">週次まとめの自動化</span>
+          </div>
+          <div class="ranking-item" data-value="精査ルールを自分で編集">
+            <span class="rank">-</span>
+            <span class="name">精査ルールを自分で編集</span>
+          </div>
+        </div>
+        <div class="ranking-summary" id="q4-summary">
+          まだ選択されていません
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="section">
+        <h2>Q5. 他にもAXADに対する要望があれば教えてください</h2>
+        <textarea name="q5" placeholder="自由に記入してください"></textarea>
+      </div>
+
+      <button class="submit-btn" id="submit-btn" onclick="submitForm()">回答を送信</button>
+    </div>
+
+    <div class="thanks" id="thanks-area">
+      <h2>✅ 回答ありがとうございました！</h2>
+      <p>いただいたフィードバックはAXADの改善に活用させていただきます。</p>
+    </div>
   </div>
 
-  <form id="survey-form">
-
-    <!-- 名前 -->
-    <div class="section">
-      <h2>👤 お名前 <span class="required">*必須</span></h2>
-      <div class="desc">回答は西村のみ確認します</div>
-      <input type="text" class="name-input" name="name" required placeholder="例：友利きらら">
-    </div>
-
-    <!-- Q1: 総合満足度 -->
-    <div class="section">
-      <h2>Q1. AXADの総合的な満足度 <span class="required">*必須</span></h2>
-      <div class="desc">スプレッドシート時代と比べて、今の業務のしやすさを評価してください</div>
-      <div class="rating-group">
-        <label><input type="radio" name="q1" value="1" required><span>1</span></label>
-        <label><input type="radio" name="q1" value="2"><span>2</span></label>
-        <label><input type="radio" name="q1" value="3"><span>3</span></label>
-        <label><input type="radio" name="q1" value="4"><span>4</span></label>
-        <label><input type="radio" name="q1" value="5"><span>5</span></label>
-      </div>
-      <div class="rating-labels"><span>不満</span><span>満足</span></div>
-    </div>
-
-    <!-- Q2: よく使う機能 -->
-    <div class="section">
-      <h2>Q2. よく使う機能はどれ？ <span class="required">*必須</span></h2>
-      <div class="desc">日常的に使っている機能を全て選んでください</div>
-      <label class="check-label"><input type="checkbox" name="q2" value="精査">精査（ルールベースの自動チェック）</label>
-      <label class="check-label"><input type="checkbox" name="q2" value="CP一覧">キャンペーン一覧・操作</label>
-      <label class="check-label"><input type="checkbox" name="q2" value="分析">分析ページ（全体/個人/日別）</label>
-      <label class="check-label"><input type="checkbox" name="q2" value="マイページ">マイページ</label>
-      <label class="check-label"><input type="checkbox" name="q2" value="自動運用">自動運用（ON/OFF・予算変更・0時ON）</label>
-      <label class="check-label"><input type="checkbox" name="q2" value="通知">Chatwork通知</label>
-      <label class="check-label"><input type="checkbox" name="q2" value="スマホ">スマホから確認</label>
-    </div>
-
-    <!-- Q3: 表示速度 -->
-    <div class="section">
-      <h2>Q3. 表示速度はどう？ <span class="required">*必須</span></h2>
-      <div class="desc">ページの読み込みやデータ表示の速さ</div>
-      <label class="radio-label"><input type="radio" name="q3" value="速い" required>速い（ストレスなし）</label>
-      <label class="radio-label"><input type="radio" name="q3" value="普通">普通（気にならない）</label>
-      <label class="radio-label"><input type="radio" name="q3" value="遅い">遅いと感じることがある</label>
-      <label class="radio-label"><input type="radio" name="q3" value="かなり遅い">かなり遅い（業務に支障）</label>
-    </div>
-
-    <!-- Q4: スプレッドシートまだ使ってる？ -->
-    <div class="section">
-      <h2>Q4. まだスプレッドシートを使ってる？ <span class="required">*必須</span></h2>
-      <div class="desc">AXADに移行できず、まだスプシに頼っている業務があれば教えてください</div>
-      <label class="radio-label"><input type="radio" name="q4" value="完全移行" required>完全にAXADに移行できた</label>
-      <label class="radio-label"><input type="radio" name="q4" value="ほぼ移行">ほぼ移行できた（たまにスプシを見る程度）</label>
-      <label class="radio-label"><input type="radio" name="q4" value="併用">まだ併用している</label>
-      <label class="radio-label"><input type="radio" name="q4" value="スプシ中心">正直スプシの方が多い</label>
-    </div>
-
-    <!-- Q4-sub: まだ使ってる場合 -->
-    <div class="section">
-      <h2>Q4-2. スプシを使う理由（該当する人のみ）</h2>
-      <div class="desc">AXADでできない・やりづらいことがあれば具体的に</div>
-      <textarea name="q4sub" placeholder="例：突き合わせの確認がまだスプシの方が慣れてる、など"></textarea>
-    </div>
-
-    <!-- Q5: 困っていること -->
-    <div class="section">
-      <h2>Q5. 困っていること・使いづらい点 <span class="required">*必須</span></h2>
-      <div class="desc">日々使っていて「ここ直してほしい」「こうだったらいいのに」を自由に</div>
-      <textarea name="q5" required placeholder="例：精査のルールを自分で変えたい、CP名が長いと見切れる、など"></textarea>
-    </div>
-
-    <!-- Q6: あったら嬉しい機能 -->
-    <div class="section">
-      <h2>Q6. あったら嬉しい機能</h2>
-      <div class="desc">なくてもOK。思いつくものがあれば</div>
-      <textarea name="q6" placeholder="例：案件ごとの利益推移グラフ、スマホで精査完了操作、など"></textarea>
-    </div>
-
-    <!-- Q7: 自由記述 -->
-    <div class="section">
-      <h2>Q7. その他、何でも</h2>
-      <div class="desc">良かった点、不満、要望、なんでもOK</div>
-      <textarea name="q7" placeholder="自由に書いてください"></textarea>
-    </div>
-
-    <button type="submit" class="submit-btn" id="submit-btn">回答を送信</button>
-  </form>
-</div>
-
-<div class="done-screen" id="done-screen">
-  <div class="check">✅</div>
-  <h2>ありがとうございました！</h2>
-  <p>回答を受け付けました。<br>フィードバックをもとに改善していきます。</p>
-</div>
-
-<script>
-document.getElementById('survey-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true;
-  btn.textContent = '送信中...';
-
-  const fd = new FormData(this);
-  const data = {};
-  for (const [key, val] of fd.entries()) {
-    if (data[key]) {
-      if (Array.isArray(data[key])) data[key].push(val);
-      else data[key] = [data[key], val];
-    } else {
-      data[key] = val;
-    }
-  }
-  data.timestamp = new Date().toISOString();
-
-  // Webhook送信（Mac miniのwebhook-receiverに送る）
-  try {
-    await fetch('https://webhook.nishiyama001.workers.dev/survey', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
+  <script>
+    // Q2 conditional
+    document.querySelectorAll('input[name="q2"]').forEach(r => {
+      r.addEventListener('change', () => {
+        document.getElementById('q2-detail').classList.toggle('show', r.value === 'ある' && r.checked);
+      });
     });
-  } catch(err) {
-    // webhook失敗してもOK、ローカルストレージにも保存
-    console.log('Webhook failed, saving locally', err);
-  }
 
-  // ローカルストレージにもバックアップ
-  const saved = JSON.parse(localStorage.getItem('axad-survey') || '[]');
-  saved.push(data);
-  localStorage.setItem('axad-survey', JSON.stringify(saved));
+    // Q4 TOP3 ranking
+    const rankLabels = ['1位', '2位', '3位'];
+    let selected = [];
 
-  document.getElementById('form-container').style.display = 'none';
-  document.getElementById('done-screen').style.display = 'block';
-});
-</script>
+    document.querySelectorAll('#q4-list .ranking-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const val = item.dataset.value;
+        const idx = selected.indexOf(val);
 
+        if (idx >= 0) {
+          // Deselect
+          selected.splice(idx, 1);
+        } else if (selected.length < 3) {
+          // Select
+          selected.push(val);
+        }
+
+        // Update UI
+        document.querySelectorAll('#q4-list .ranking-item').forEach(el => {
+          const i = selected.indexOf(el.dataset.value);
+          const rankEl = el.querySelector('.rank');
+          if (i >= 0) {
+            el.classList.add('selected');
+            rankEl.textContent = rankLabels[i];
+            rankEl.classList.add('active');
+          } else {
+            el.classList.remove('selected');
+            rankEl.textContent = '-';
+            rankEl.classList.remove('active');
+          }
+        });
+
+        // Update summary
+        const summary = document.getElementById('q4-summary');
+        if (selected.length === 0) {
+          summary.innerHTML = 'まだ選択されていません';
+        } else {
+          summary.innerHTML = selected.map((v, i) =>
+            `<span class="chosen-item">${rankLabels[i]}: ${v}</span>`
+          ).join('<br>');
+        }
+      });
+    });
+
+    // Submit
+    function submitForm() {
+      // Validate Q1
+      const q1 = [...document.querySelectorAll('input[name="q1"]:checked')].map(c => c.value);
+      if (q1.length === 0) { alert('Q1を選択してください'); return; }
+
+      // Validate Q2
+      const q2 = document.querySelector('input[name="q2"]:checked');
+      if (!q2) { alert('Q2を選択してください'); return; }
+
+      // Validate Q4
+      if (selected.length < 3) { alert('Q4でTOP3を選んでください'); return; }
+
+      const data = {
+        q1_pages: q1,
+        q2_spreadsheet: q2.value,
+        q2_detail: document.querySelector('textarea[name="q2_detail"]')?.value || '',
+        q3_automation: document.querySelector('textarea[name="q3"]')?.value || '',
+        q4_top3: selected,
+        q5_other: document.querySelector('textarea[name="q5"]')?.value || '',
+        timestamp: new Date().toISOString()
+      };
+
+      console.log('Survey Response:', JSON.stringify(data, null, 2));
+
+      // TODO: Send to backend
+      // For now, store in localStorage
+      const responses = JSON.parse(localStorage.getItem('axad-survey') || '[]');
+      responses.push(data);
+      localStorage.setItem('axad-survey', JSON.stringify(responses));
+
+      document.getElementById('form-area').style.display = 'none';
+      document.getElementById('thanks-area').style.display = 'block';
+    }
+  </script>
 </body>
 </html>
