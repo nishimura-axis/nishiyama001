@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>はなちゃんの第二の脳セットアップ | Obsidian × Claude Code</title>
+    <title>はなちゃんの Claude Code セットアップ</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -24,6 +24,9 @@
         .container { max-width:800px; margin:0 auto; padding:2rem 1.5rem; }
         h1 { font-size:1.8rem; margin-bottom:0.5rem; background:var(--accent-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
         .subtitle { color:var(--text-secondary); margin-bottom:2rem; }
+        .goal { margin-bottom:2rem; padding:1.2rem; background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.2); border-radius:12px; }
+        .goal h3 { font-size:1rem; margin-bottom:0.3rem; }
+        .goal p { color:var(--text-secondary); font-size:0.95rem; }
         .step { background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:16px; padding:1.5rem; margin-bottom:1.5rem; }
         .step h3 { font-size:1.1rem; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem; }
         .step-num { background:var(--accent-gradient); color:white; width:28px; height:28px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.85rem; font-weight:700; flex-shrink:0; }
@@ -33,7 +36,6 @@
         a { color:var(--accent-primary); }
         .warn { margin-top:1rem; padding:0.75rem 1rem; background:rgba(239,68,68,0.1); border-radius:8px; font-size:0.9rem; color:var(--text-secondary); }
         .tip { margin-top:1rem; padding:0.75rem 1rem; background:rgba(99,102,241,0.1); border-radius:8px; font-size:0.9rem; color:var(--text-secondary); }
-        .note { margin:1rem 0; padding:1rem; background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.2); border-radius:8px; color:var(--text-secondary); }
         .code-block { position:relative; margin:1rem 0; }
         .code-block pre { background:var(--bg-primary); border:1px solid var(--border-color); border-radius:8px; padding:1rem; color:var(--text-secondary); white-space:pre-wrap; word-wrap:break-word; font-size:0.85rem; line-height:1.6; max-height:400px; overflow-y:auto; }
         .copy-btn { position:absolute; top:8px; right:8px; background:var(--bg-tertiary); border:1px solid var(--border-color); color:var(--text-secondary); padding:4px 10px; border-radius:6px; cursor:pointer; font-size:0.8rem; z-index:1; }
@@ -46,132 +48,67 @@
 </head>
 <body>
 <div class="container">
-    <h1>🧠 はなちゃんの第二の脳セットアップ</h1>
-    <p class="subtitle">Obsidian × Claude Code で「AIが管理する情報倉庫」を作る</p>
+    <h1>🧠 はなちゃんの Claude Code セットアップ</h1>
+    <p class="subtitle">既存のObsidian VaultにClaude Codeからアクセスできるようにする</p>
 
-    <div class="note">
-        ✅ <strong>Cursorは導入済み</strong>なので、Cursorのターミナルからclaude（Claude Code CLI）を使います。<br>
-        やることは <strong>Obsidian + GitHub + Claude Code CLI</strong> のセットアップです。
+    <div class="goal">
+        <h3>🎯 ゴール</h3>
+        <p>今使っているObsidian Vault を、Claude Code（AI）から読み書きできるようにする。<br>
+        Obsidian・GitHub は導入済みなので、<strong>Claude Codeのセットアップだけ</strong>でOK。</p>
     </div>
 
     <div class="step">
         <h3><span class="step-num">1</span> Claude Max に契約する <span class="time">⏱️ 5分</span></h3>
+        <p style="color:var(--text-secondary); margin-bottom:0.5rem;">既に契約済みならスキップ。</p>
         <ol>
             <li>ブラウザで <a href="https://claude.ai" target="_blank">claude.ai</a> を開く</li>
-            <li>「Sign Up」からアカウントを作成（会社メールでOK）</li>
-            <li>ログイン後、左下のアイコン →「Upgrade」</li>
-            <li><strong style="color:#ef4444;">Max（月$100 ≒ 約15,000円）を選択</strong></li>
-            <li>クレジットカード情報を入力して契約完了</li>
+            <li>アカウント作成 or ログイン</li>
+            <li>左下のアイコン →「Upgrade」→ <strong style="color:#ef4444;">Max（月$100）を選択</strong></li>
         </ol>
-        <div class="warn">⚠️ ProではなくMaxを選んでください。Proだと使用量の上限にすぐ到達します。<br>💳 支払い方法がわからない場合は西村に聞いてください。</div>
+        <div class="warn">⚠️ ProではなくMaxを選んでください。Proだと使用量の上限にすぐ到達します。<br>💳 支払いがわからなければ西村に聞いてください。</div>
     </div>
 
     <div class="step">
-        <h3><span class="step-num">2</span> Obsidianをインストール <span class="time">⏱️ 5分</span></h3>
+        <h3><span class="step-num">2</span> Claude Codeを起動してVaultを開く <span class="time">⏱️ 10分</span></h3>
+        <p style="color:var(--text-secondary); margin-bottom:1rem;">Cursorは導入済みなので、<strong>2つの方法</strong>から選んでください。</p>
+
+        <h4 style="margin-bottom:0.5rem;">方法A: Claude Desktop アプリ（おすすめ）</h4>
         <ol>
-            <li>ブラウザで <a href="https://obsidian.md" target="_blank">obsidian.md</a> を開く</li>
-            <li>「Get Obsidian for free」をクリック</li>
-            <li>お使いのOS用をダウンロード・インストール</li>
+            <li><a href="https://claude.ai/download" target="_blank">claude.ai/download</a> からアプリをダウンロード・インストール</li>
+            <li>アプリを起動してClaudeアカウントでログイン</li>
+            <li>上部メニューの <strong>「Code」タブ</strong> をクリック</li>
+            <li>「Select folder」で <strong>Obsidian Vaultのフォルダ</strong> を選ぶ</li>
+            <li>「このフォルダを信頼しますか？」→「はい」</li>
         </ol>
-    </div>
+        <div class="tip">💡 「Code」タブが見つからない → アプリ上部「Claude」→「Check for Updates」で最新版に。</div>
 
-    <div class="step">
-        <h3><span class="step-num">3</span> Vaultを作成する <span class="time">⏱️ 3分</span></h3>
+        <h4 style="margin:2rem 0 0.5rem;">方法B: Cursorのターミナルから起動</h4>
         <ol>
-            <li>Obsidianを起動</li>
-            <li>「<strong>Create new vault</strong>」をクリック</li>
-            <li>Vault name: <code>MyVault</code>（好きな名前でOK）</li>
-            <li>Location: <strong>「書類」（Documents）フォルダ</strong>を選択</li>
-            <li>「Create」をクリック</li>
+            <li>Cursorのターミナル（<code>Ctrl + `</code>）で以下を実行：</li>
         </ol>
-        <div class="tip">💡 作成したらObsidianは一旦閉じてOK。この後はClaude Codeで操作します。</div>
-    </div>
-
-    <div class="step">
-        <h3><span class="step-num">4</span> GitHubアカウントを作成する <span class="time">⏱️ 5分</span></h3>
-        <p style="color:var(--text-secondary); margin-bottom:0.5rem;">既に持っていればスキップ。</p>
-        <ol>
-            <li>ブラウザで <a href="https://github.com" target="_blank">github.com</a> を開く</li>
-            <li>「Sign up」をクリック</li>
-            <li>メールアドレス（会社メールでOK）、パスワード、ユーザー名を入力</li>
-            <li>メールに届いた認証コードを入力</li>
-        </ol>
-    </div>
-
-    <div class="step">
-        <h3><span class="step-num">5</span> Claude Code CLIをインストール <span class="time">⏱️ 10分</span></h3>
-        <p style="color:var(--text-secondary); margin-bottom:1rem;">Cursorのターミナル（<code>Ctrl + `</code> で開く）で以下を実行：</p>
-
-        <h4 style="margin-bottom:0.5rem;">Mac の場合</h4>
         <div class="code-block">
             <button class="copy-btn" onclick="copyCode(this)">📋 コピー</button>
             <pre>npm install -g @anthropic-ai/claude-code</pre>
         </div>
-
-        <h4 style="margin:1rem 0 0.5rem;">Windows の場合</h4>
-        <div class="code-block">
-            <button class="copy-btn" onclick="copyCode(this)">📋 コピー</button>
-            <pre>npm install -g @anthropic-ai/claude-code</pre>
-        </div>
-        <div class="warn">⚠️ <code>npm</code>が見つからない場合 → <a href="https://nodejs.org" target="_blank">nodejs.org</a> からNode.jsをインストールしてからやり直し。</div>
-
-        <h4 style="margin:1.5rem 0 0.5rem;">インストール確認</h4>
-        <div class="code-block">
-            <button class="copy-btn" onclick="copyCode(this)">📋 コピー</button>
-            <pre>claude --version</pre>
-        </div>
-        <p style="color:var(--text-secondary);">バージョン番号が出ればOK。</p>
-    </div>
-
-    <div class="step">
-        <h3><span class="step-num">6</span> Claude Codeを起動する <span class="time">⏱️ 3分</span></h3>
-        <p style="color:var(--text-secondary); margin-bottom:1rem;">Cursorのターミナルで、Vaultフォルダに移動してから <code>claude</code> を起動：</p>
-
-        <h4 style="margin-bottom:0.5rem;">Mac の場合</h4>
+        <p style="color:var(--text-secondary); margin:0.5rem 0;">インストール後、Vaultフォルダに移動して起動：</p>
         <div class="code-block">
             <button class="copy-btn" onclick="copyCode(this)">📋 コピー</button>
             <pre>cd ~/Documents/MyVault && claude</pre>
         </div>
-
-        <h4 style="margin:1rem 0 0.5rem;">Windows の場合</h4>
-        <div class="code-block">
-            <button class="copy-btn" onclick="copyCode(this)">📋 コピー</button>
-            <pre>cd %USERPROFILE%\Documents\MyVault && claude</pre>
-        </div>
-
-        <p style="color:var(--text-secondary); margin-top:1rem;">初回起動時にブラウザ認証が開きます。STEP 1で作ったClaudeアカウントでログインしてください。</p>
-        <div class="tip">💡 次回以降もCursorのターミナルで <code>cd ~/Documents/MyVault && claude</code> で起動できます。</div>
+        <p style="color:var(--text-muted); font-size:0.85rem;">※ Vaultの場所が違う場合はパスを変えてください</p>
+        <div class="warn">⚠️ <code>npm</code>が見つからない → <a href="https://nodejs.org" target="_blank">nodejs.org</a> からNode.jsを先にインストール。</div>
     </div>
 
     <div class="step">
-        <h3><span class="step-num">7</span> Claude Codeで初期セットアップ <span style="color:#22c55e; font-size:0.85rem; margin-left:auto;">🎉 ここからAIにお任せ！</span></h3>
-        <p style="color:var(--text-secondary); margin-bottom:1rem;">Claude Codeが起動したら、以下をコピペして送信してください。</p>
+        <h3><span class="step-num">3</span> CLAUDE.md を設定する <span style="color:#22c55e; font-size:0.85rem; margin-left:auto;">🎉 AIにお任せ！</span></h3>
+        <p style="color:var(--text-secondary); margin-bottom:1rem;">Claude Codeが起動したら、以下をコピペして送信してください。<br>AIの動き方を決める設定ファイルが自動で作られます。</p>
         <div class="code-block">
             <button class="copy-btn" onclick="copyCode(this)">📋 コピー</button>
-            <pre id="prompt1"># 第二の脳 初期セットアップ
+            <pre>以下の作業をお願いします。
 
-私のObsidian Vaultを「第二の脳」として構築してください。
+## 1. CLAUDE.md（グローバル設定）を作成
 
-## 1. フォルダ構造の作成
-
-以下のフォルダを作成してください：
-
-```
-00_Inbox/          ← とりあえず放り込む場所
-07_DailyLog/       ← 日々のログ（自動蓄積）
-10_Goals/          ← 目標管理
-20_Context/        ← 業務の前提情報（AIの知識ベース）
-30_Projects/       ← プロジェクト管理
-40_Knowledge/      ← 普遍的なノウハウ
-50_Literature/     ← 読書・記事メモ
-60_Templates/      ← テンプレート
-```
-
-各フォルダに .gitkeep を作成してください。
-
-## 2. CLAUDE.md の作成
-
-~/.claude/CLAUDE.md に以下の内容を保存してください（ディレクトリがなければ作成）：
+~/.claude/CLAUDE.md に以下を保存してください（ディレクトリがなければ作成）：
 
 ```markdown
 # Global Rules
@@ -200,46 +137,26 @@
 - 秘密情報をコードにハードコードしない
 ```
 
-## 3. Git初期設定とGitHub連携
-
-私にGitHubのユーザー名とメールアドレスを聞いてから、以下を実行してください：
-- `gh` コマンドがなければインストール（Mac: `brew install gh` / Windows: `winget install GitHub.cli`）
-- `gh auth login` でブラウザ認証
-- リポジトリ名: MyVault（private）で作成
-- 全ファイルをcommitしてpush（メッセージ：「初期セットアップ完了」）
-
-## 4. 動作確認
+## 2. 動作確認
 
 以下を確認して結果を教えてください：
-- [ ] フォルダ構造が正しく作成されている
-- [ ] CLAUDE.mdが~/.claude/に保存されている
-- [ ] GitHubにプライベートリポジトリが作成されている
-- [ ] pushが成功している
+- [ ] CLAUDE.md が ~/.claude/ に保存されている
+- [ ] 現在のフォルダがObsidian Vaultである（.obsidian/ フォルダがある）
+- [ ] Vault内のファイル一覧を表示
 
 よろしくお願いします！</pre>
         </div>
-        <div class="warn">⚠️ AIが途中で「実行してよいですか？」と聞いてきます。すべて「はい」でOK。</div>
-        <div class="tip">💡 GitHub認証時にブラウザが開きます。「Authorize GitHub CLI」の画面で緑のボタンをクリック。</div>
-    </div>
-
-    <div class="step">
-        <h3><span class="step-num">8</span> テンプレートを追加する <span class="time">⏱️ 5分</span></h3>
-        <p style="color:var(--text-secondary); margin-bottom:1rem;">まず以下のZIPをダウンロードしてください。</p>
-        <div style="text-align:center; margin:1rem 0;">
-            <a href="../context-templates.zip" download style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1.5rem; background:var(--accent-gradient); color:white; border-radius:10px; font-weight:500; text-decoration:none;">📥 テンプレート（ZIP）</a>
-        </div>
-        <p style="color:var(--text-secondary); margin-bottom:1rem;">ダウンロード後、Claude Codeに以下を送信：</p>
-        <div class="code-block">
-            <button class="copy-btn" onclick="copyCode(this)">📋 コピー</button>
-            <pre>~/Downloads/context-templates.zip を解凍して、中身の.mdファイルを 60_Templates/ に配置してください。
-完了したらGitHubにcommit &amp; push（メッセージ：「テンプレート追加」）</pre>
-        </div>
+        <div class="warn">⚠️ AIが「実行してよいですか？」と聞いてきたら「はい」でOK。</div>
     </div>
 
     <div class="done">
         <h2>🎉 セットアップ完了！</h2>
-        <p style="color:var(--text-secondary);">Obsidianを開くと、AIが作ったフォルダ構造が見えるはず。<br>あとはClaude Codeに「これメモして」「今週の振り返りまとめて」と話しかけるだけ。</p>
-        <p style="color:var(--text-muted); margin-top:1rem; font-size:0.9rem;">困ったら西村に聞いてください 👋</p>
+        <p style="color:var(--text-secondary);">これでClaude CodeからObsidian Vaultの読み書きができるようになりました。<br><br>
+        試しに話しかけてみてください：<br>
+        「Vault内のファイル一覧を見せて」<br>
+        「今週の振り返りをまとめて」<br>
+        「これメモしておいて：〇〇〇」</p>
+        <p style="color:var(--text-muted); margin-top:1.5rem; font-size:0.9rem;">困ったら西村に聞いてください 👋</p>
     </div>
 </div>
 
