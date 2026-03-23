@@ -147,41 +147,9 @@
 
 各フォルダに .gitkeep を作成してください。
 
-## 2. CLAUDE.md（グローバル設定）を作成
-
-~/.claude/CLAUDE.md に以下を保存してください（ディレクトリがなければ作成）：
-
-```markdown
-# Global Rules
-
-## 言語
-- 日本語で応答する
-
-## 基本方針
-- 推測・創作を禁止。不明点は必ず質問する
-- 複数の解釈が可能な場合は確認する
-- セッション開始時にメモリファイルを読んでから応答
-- ユーザーの訂正や好みは即座に保存
-
-## ワークフロー: Plan → Execute
-1. まず計画を立てて確認する
-2. 承認されてから実行する
-3. スコープが逸れたら計画に戻る
-
-## 作業の可視化
-- 各ステップの前後でフェーズを表示する
-- 失敗したら正確なエラーを表示する
-
-## コーディング原則
-- 既存のアーキテクチャとパターンに従う
-- 依頼されていない機能追加やリファクタリングはしない
-- 秘密情報をコードにハードコードしない
-```
-
-## 3. 動作確認
+## 2. 動作確認
 
 - [ ] フォルダ構造が作成されている
-- [ ] CLAUDE.md が ~/.claude/ に保存されている
 - [ ] 現在のフォルダがObsidian Vault（.obsidian/がある）
 
 確認結果を教えてください。</pre>
@@ -189,9 +157,25 @@
         <div class="warn">⚠️ AIが「実行してよいですか？」と聞いてきたら「はい」でOK。</div>
     </div>
 
-    <!-- STEP 7: GitHub連携 -->
+        <!-- STEP 7: CLAUDE.md テンプレート -->
     <div class="step">
-        <h3><span class="step-num">7</span> GitHub連携 + 初回push <span class="time">⏱️ 10分</span></h3>
+        <h3><span class="step-num">7</span> CLAUDE.md テンプレートを設定 <span class="time">⏱️ 3分</span></h3>
+        <p style="color:var(--text-secondary); margin-bottom:1rem;">AIの動き方を決める設定ファイルを配置します。まず以下をダウンロード：</p>
+        <div style="text-align:center; margin:1rem 0;">
+            <a href="../CLAUDE-global.md" download style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1.5rem; background:var(--accent-gradient); color:white; border-radius:10px; font-weight:500; text-decoration:none;">📥 CLAUDE.md テンプレート</a>
+        </div>
+        <p style="color:var(--text-secondary); margin-bottom:1rem;">ダウンロード後、Claude Codeに以下を送信：</p>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">📋 コピー</button>
+            <pre>~/Downloads/CLAUDE-global.md を ~/.claude/CLAUDE.md にコピーしてください。
+（~/.claude/ ディレクトリがなければ作成）
+完了したら中身を表示して確認させてください。</pre>
+        </div>
+    </div>
+
+    <!-- STEP 8: GitHub連携 -->
+    <div class="step">
+        <h3><span class="step-num">8</span> GitHub連携 + 初回push <span class="time">⏱️ 10分</span></h3>
         <p style="color:var(--text-secondary); margin-bottom:1rem;">VaultをGitHubにバックアップします。以下をClaude Codeに送信：</p>
         <div class="code-block">
             <button class="copy-btn" onclick="copyCode(this)">📋 コピー</button>
@@ -233,7 +217,7 @@
 
     <!-- STEP 8: Obsidian Git プラグイン -->
     <div class="step">
-        <h3><span class="step-num">8</span> Obsidian Git プラグインで自動同期 <span class="time">⏱️ 5分</span></h3>
+        <h3><span class="step-num">9</span> Obsidian Git プラグインで自動同期 <span class="time">⏱️ 5分</span></h3>
         <p style="color:var(--text-secondary); margin-bottom:1rem;">Obsidianを開くだけで自動的にGitHubと同期されるようにします。</p>
 
         <h4>① プラグインをインストール</h4>
@@ -263,7 +247,7 @@
 
     <!-- STEP 9: テンプレート -->
     <div class="step">
-        <h3><span class="step-num">9</span> テンプレートを追加する <span class="time">⏱️ 5分</span></h3>
+        <h3><span class="step-num">10</span> テンプレートを追加する <span class="time">⏱️ 5分</span></h3>
         <p style="color:var(--text-secondary); margin-bottom:1rem;">目標管理・PJ管理・議事録など、便利なテンプレートを追加します。まずZIPをダウンロード：</p>
         <div style="text-align:center; margin:1rem 0;">
             <a href="../context-templates.zip" download style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1.5rem; background:var(--accent-gradient); color:white; border-radius:10px; font-weight:500; text-decoration:none;">📥 テンプレート（ZIP）</a>

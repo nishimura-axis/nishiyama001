@@ -17,7 +17,6 @@
             --text-secondary: #94a3b8;
             --text-muted: #64748b;
             --border-color: #2d2d3a;
-            --glow: 0 0 40px rgba(99, 102, 241, 0.3);
         }
         * { margin:0; padding:0; box-sizing:border-box; }
         body { font-family:'Noto Sans JP',sans-serif; background:var(--bg-primary); color:var(--text-primary); line-height:1.8; }
@@ -36,14 +35,17 @@
         a { color:var(--accent-primary); }
         .warn { margin-top:1rem; padding:0.75rem 1rem; background:rgba(239,68,68,0.1); border-radius:8px; font-size:0.9rem; color:var(--text-secondary); }
         .tip { margin-top:1rem; padding:0.75rem 1rem; background:rgba(99,102,241,0.1); border-radius:8px; font-size:0.9rem; color:var(--text-secondary); }
+        .note { margin:1rem 0; padding:1rem; background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.2); border-radius:8px; color:var(--text-secondary); }
         .code-block { position:relative; margin:1rem 0; }
         .code-block pre { background:var(--bg-primary); border:1px solid var(--border-color); border-radius:8px; padding:1rem; color:var(--text-secondary); white-space:pre-wrap; word-wrap:break-word; font-size:0.85rem; line-height:1.6; max-height:400px; overflow-y:auto; }
         .copy-btn { position:absolute; top:8px; right:8px; background:var(--bg-tertiary); border:1px solid var(--border-color); color:var(--text-secondary); padding:4px 10px; border-radius:6px; cursor:pointer; font-size:0.8rem; z-index:1; }
         .copy-btn:hover { background:var(--accent-primary); color:white; }
+        .dl-btn { display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1.5rem; background:var(--accent-gradient); color:white; border-radius:10px; font-weight:500; text-decoration:none; }
         .done { text-align:center; padding:3rem 1rem; }
         .done h2 { font-size:1.5rem; margin-bottom:1rem; }
         strong { color:var(--text-primary); }
         code { background:var(--bg-tertiary); padding:0.15rem 0.4rem; border-radius:4px; font-size:0.9em; }
+        h4 { color:var(--text-primary); margin:1.5rem 0 0.5rem; }
     </style>
 </head>
 <body>
@@ -72,7 +74,7 @@
         <h3><span class="step-num">2</span> Claude Codeを起動してVaultを開く <span class="time">⏱️ 10分</span></h3>
         <p style="color:var(--text-secondary); margin-bottom:1rem;">Cursorは導入済みなので、<strong>2つの方法</strong>から選んでください。</p>
 
-        <h4 style="margin-bottom:0.5rem;">方法A: Claude Desktop アプリ（おすすめ）</h4>
+        <h4>方法A: Claude Desktop アプリ（おすすめ）</h4>
         <ol>
             <li><a href="https://claude.ai/download" target="_blank">claude.ai/download</a> からアプリをダウンロード・インストール</li>
             <li>アプリを起動してClaudeアカウントでログイン</li>
@@ -82,7 +84,7 @@
         </ol>
         <div class="tip">💡 「Code」タブが見つからない → アプリ上部「Claude」→「Check for Updates」で最新版に。</div>
 
-        <h4 style="margin:2rem 0 0.5rem;">方法B: Cursorのターミナルから起動</h4>
+        <h4>方法B: Cursorのターミナルから起動</h4>
         <ol>
             <li>Cursorのターミナル（<code>Ctrl + `</code>）で以下を実行：</li>
         </ol>
@@ -101,41 +103,19 @@
 
     <div class="step">
         <h3><span class="step-num">3</span> CLAUDE.md を設定する <span style="color:#22c55e; font-size:0.85rem; margin-left:auto;">🎉 AIにお任せ！</span></h3>
-        <p style="color:var(--text-secondary); margin-bottom:1rem;">Claude Codeが起動したら、以下をコピペして送信してください。<br>AIの動き方を決める設定ファイルが自動で作られます。</p>
+        <p style="color:var(--text-secondary); margin-bottom:1rem;">AIの動き方を決める設定ファイルを配置します。<br>まず以下のテンプレートをダウンロード：</p>
+        <div style="text-align:center; margin:1rem 0;">
+            <a href="../CLAUDE-global.md" download class="dl-btn">📥 CLAUDE.md テンプレート</a>
+        </div>
+        <p style="color:var(--text-secondary); margin-bottom:1rem;">ダウンロード後、Claude Codeに以下を送信：</p>
         <div class="code-block">
             <button class="copy-btn" onclick="copyCode(this)">📋 コピー</button>
             <pre>以下の作業をお願いします。
 
-## 1. CLAUDE.md（グローバル設定）を作成
+## 1. CLAUDE.md（グローバル設定）を配置
 
-~/.claude/CLAUDE.md に以下を保存してください（ディレクトリがなければ作成）：
-
-```markdown
-# Global Rules
-
-## 言語
-- 日本語で応答する
-
-## 基本方針
-- 推測・創作を禁止。不明点は必ず質問する
-- 複数の解釈が可能な場合は確認する
-- セッション開始時にメモリファイルを読んでから応答
-- ユーザーの訂正や好みは即座に保存
-
-## ワークフロー: Plan → Execute
-1. まず計画を立てて確認する
-2. 承認されてから実行する
-3. スコープが逸れたら計画に戻る
-
-## 作業の可視化
-- 各ステップの前後でフェーズを表示する
-- 失敗したら正確なエラーを表示する
-
-## コーディング原則
-- 既存のアーキテクチャとパターンに従う
-- 依頼されていない機能追加やリファクタリングはしない
-- 秘密情報をコードにハードコードしない
-```
+~/Downloads/CLAUDE-global.md を ~/.claude/CLAUDE.md にコピーしてください。
+（~/.claude/ ディレクトリがなければ作成）
 
 ## 2. 動作確認
 
